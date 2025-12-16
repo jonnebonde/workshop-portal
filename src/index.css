@@ -4,6 +4,50 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* =========================
+     CORE / BRAND
+  ========================= */
+  --color-brand-primary: #2C7BE5;
+  --color-brand-dark: #12263F;
+  --color-brand-background: #F9FBFD;
+  --color-brand-surface: #FFFFFF;
+
+  /* =========================
+     SEMANTIC
+  ========================= */
+  --color-semantic-success: #00D97E;
+  --color-semantic-warning: #F5D83E;
+  --color-semantic-danger: #E63757;
+  --color-semantic-info: #2C7BE5;
+
+  /* =========================
+     NEUTRAL SCALE
+  ========================= */
+  --color-neutral-900: #283E59;
+  --color-neutral-800: #3B516C;
+  --color-neutral-700: #6E84A3;
+  --color-neutral-600: #95AAC9;
+  --color-neutral-500: #B1C2D9;
+  --color-neutral-400: #D2DDEC;
+  --color-neutral-300: #E4EBF6;
+  --color-neutral-200: #EDF2F9;
+}
+
+/* =========================
+   DARK MODE (OPTIONAL)
+========================= */
+[data-theme="dark"] {
+  --color-neutral-900: #132A46;
+  --color-neutral-800: #152E4D;
+  --color-neutral-700: #1E3A5C;
+  --color-neutral-600: #244166;
+
+  /* Optional overrides */
+  --color-brand-background: #12263F;
+  --color-brand-surface: #132A46;
+}
+
 body,
 main {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -61,23 +105,23 @@ main {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--color-neutral-200);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c5c5c5;
+  background: var(--color-neutral-500);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1a1;
+  background: var(--color-neutral-600);
 }
 
 /* Input focus styles */
 input:focus, textarea:focus, select:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(26, 54, 93, 0.2);
+  box-shadow: 0 0 0 2px rgba(44, 123, 229, 0.25);
 }
 
 /* Card hover effects */

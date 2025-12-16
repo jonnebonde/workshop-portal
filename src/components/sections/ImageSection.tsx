@@ -192,13 +192,13 @@ const ImageSection: React.FC<ImageSectionProps> = ({
             <img
               src={preview}
               alt={title}
-              className="w-full h-32 object-cover rounded-lg border border-gray-200"
+              className="w-full h-48 object-cover rounded-lg "
             />
             <button
               onClick={clearPreview}
-              className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+              className="absolute top-0 right-0 bg-red-500 text-white rounded-bl-lg rounded-tr-lg p-1 hover:bg-red-600"
             >
-              <X className="h-3 w-3" />
+              <X className="h-6 w-6" />
             </button>
           </div>
         ) : (
@@ -401,7 +401,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({
               <SingleImageUploadBox
                 title="Vehicle Overview"
                 description="Full view of the vehicle with the damaged area"
-                tip="Take photo from a distance with the entire vehicle and damaged glass area. Ensure good lighting and clear visibility of the damage."
+                ti="Take photo from a distance with the entire vehicle and damaged glass area. Ensure good lighting and clear visibility of the damage."
                 preview={vehicleOverviewPreview}
                 onPreviewChange={setVehicleOverviewPreview}
                 fieldName="vehicleOverview"
@@ -410,7 +410,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({
               <SingleImageUploadBox
                 title="Glass Close-up"
                 description="Close-up view of the damaged glass"
-                tip="Focus on the glass damage, ensure good lighting and clear visibility of cracks or chips. Use good contrast to show damage clearly. "
+                ti="Focus on the glass damage, ensure good lighting and clear visibility of cracks or chips. Use good contrast to show damage clearly. "
                 preview={glassCloseUpPreview}
                 onPreviewChange={setGlassCloseUpPreview}
                 fieldName="glassCloseUp"
@@ -419,7 +419,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({
               <SingleImageUploadBox
                 title="Damage Detail"
                 description="Detailed view of the specific damage area"
-                tip="Get very close to show the exact nature and extent of the damage. Include reference objects for scale if helpful."
+                ti="Get very close to show the exact nature and extent of the damage. Include reference objects for scale if helpful."
                 preview={damageDetailPreview}
                 onPreviewChange={setDamageDetailPreview}
                 fieldName="damageDetail"
