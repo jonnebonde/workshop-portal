@@ -136,7 +136,7 @@ const DdfFileManagement: React.FC<DdfFileManagementProps> = ({
       isSectionComplete={isSectionComplete}
       approvalStatus={approvalStatus}
     >
-      <div className="grid grid-cols-1  gap-4">
+      <div className="grid grid-cols-2  gap-4">
         {/* Upload Section */}
         <div className="flex flex-col">
           <h4 className="text-sm font-semibold text-gray-900 mb-3">Upload Document</h4>

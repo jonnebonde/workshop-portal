@@ -417,9 +417,9 @@ const CaseDetail: React.FC = () => {
                       <InsuranceCoverageSection caseData={caseData} onUpdate={handleUpdateCase} />
                     </SectionWrapper>
                   </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+              <div className="grid grid-cols-1 gap-4 items-start">
 
-                <div className="space-y-4">
+              
                   
 
                   <div id="ddf">
@@ -431,7 +431,7 @@ const CaseDetail: React.FC = () => {
                       approvalStatus={ddfApprovalStatus}
                     />
                   </div>
-                </div>
+              
 
                 {/* Right Column: Images */}
                 <div id="images">

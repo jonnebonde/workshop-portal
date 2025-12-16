@@ -62,7 +62,7 @@ const KpiCard: React.FC<KpiCardProps> = ({
     >
       <div className="flex justify-between items-start mb-3">
         <p className="text-xs sm:text-sm font-medium text-gray-600 leading-tight">{title}</p>
-        {icon && <div className="text-[#1A365D] flex-shrink-0 ml-2">{icon}</div>}
+        {icon && <div className="text-brand-primary flex-shrink-0 ml-2">{icon}</div>}
       </div>
       <div className="flex items-baseline">
         <p className="text-lg sm:text-2xl font-semibold text-gray-900 leading-tight">{formattedValue}</p>

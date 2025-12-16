@@ -41,7 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
     <div className="flex h-screen overflow-hidden"> 
       {/* Full-width top navigation */}
-      <header className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between h-16 px-4 sm:px-6 bg-[#1A365D] border-b border-[#1A365D] shadow-sm">
+      <header className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between h-16 px-4 sm:px-6 bg-brand-dark border-b border-brand-dark shadow-sm">
         <button 
           className="p-2 text-white rounded-lg lg:hidden hover:text-gray-200 hover:bg-blue-700 transition-colors"
           onClick={() => setIsSidebarOpen(true)}
@@ -118,7 +118,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       
       {/* Sidebar */}
       <aside 
-        className={`fixed inset-y-0 left-0 z-30 w-48 h-screen transform bg-[#1A365D] transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-30 w-48 h-screen transform bg-brand-dark transition-transform duration-300 ease-in-out lg:translate-x-0 ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -183,7 +183,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </aside>
       
       {/* Main content */}
-      <div className="flex flex-col flex-1 bg-[#1A365D] mt-16">
+      <div className="flex flex-col flex-1 bg-brand-dark mt-16">
 
         {/* Scrollable content area */}
         <div className="flex-1 overflow-y-auto bg-gray-50 min-w-0 rounded-tl-md lg:ml-48">
