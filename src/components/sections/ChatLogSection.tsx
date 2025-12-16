@@ -78,9 +78,9 @@ const ChatLogSection: React.FC<ChatLogSectionProps> = ({
   const getSenderColor = (senderType: string) => {
     switch (senderType) {
       case 'agent':
-        return 'bg-blue-500 text-white';
-      case 'workshop':
         return 'bg-green-500 text-white';
+      case 'workshop':
+        return 'bg-blue-500 text-white';
       case 'system':
         return 'bg-gray-500 text-white';
       default:

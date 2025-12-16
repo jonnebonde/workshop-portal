@@ -90,7 +90,7 @@ const Dashboard: React.FC = () => {
       {/* Sticky Search and Tabs Container */} 
       <div className="sticky top-0 bg-gray-50 pb-4 z-10">
         <div className=" sm:px-0">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden mb-4">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-300 overflow-hidden mb-4">
             {/* Search Bar */}
             <TableToolbar
               searchTerm={searchTerm}
@@ -99,7 +99,7 @@ const Dashboard: React.FC = () => {
             />
           </div>
           
-          <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-300 overflow-hidden">
             {/* Tab Navigation */}
             <div className="border-b border-gray-200">
               <div className="flex border-b border-gray-200">

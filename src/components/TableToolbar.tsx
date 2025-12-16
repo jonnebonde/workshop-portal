@@ -56,20 +56,20 @@ const TableToolbar: React.FC<TableToolbarProps> = ({
   };
 
   return ( 
-    <div className={`p-4 space-y-4 border-b border-gray-200 ${className}`}>
+    <div className={`p-4 space-y-4 border-b border-gray-300 ${className}`}>
       {/* Search and Filter Row */}
       <div className="flex flex-col sm:flex-row gap-4">
         {/* Search Input */}
         <form onSubmit={handleSearchSubmit} className="flex-1 relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-4 w-4 text-gray-400" />
+            <Search className="h-4 w-4 text-gray-500" />
           </div>
           <input
             type="text"
             placeholder="Search..."
             value={localSearchTerm}
             onChange={handleSearchChange}
-            className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg shadow-sm focus:border-transparent focus:ring-2 focus:ring-blue-500 text-sm"
+            className="block w-full pl-10 pr-10 py-3 border border-gray-400 rounded-lg shadow-sm focus:border-transparent focus:ring-2 focus:ring-blue-500 text-"
           />
           {localSearchTerm && (
             <button

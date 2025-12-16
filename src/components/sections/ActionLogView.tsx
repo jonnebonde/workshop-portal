@@ -27,26 +27,26 @@ const ActionLogView: React.FC<ActionLogViewProps> = ({ actionLog }) => {
   const getActorIconColor = (actorType: ActionLogEntry['actorType']) => {
     switch (actorType) {
       case 'system':
-        return 'bg-gray-400 text-white';
+        return 'bg-gray-500 text-white';
       case 'agent':
-        return 'bg-blue-500 text-white';
-      case 'workshop':
         return 'bg-green-500 text-white';
+      case 'workshop':
+        return 'bg-blue-500 text-white';
       default:
-        return 'bg-gray-400 text-white';
+        return 'bg-gray-500 text-white';
     }
   };
 
   const getMessageBubbleColor = (actorType: ActionLogEntry['actorType']) => {
     switch (actorType) {
       case 'system':
-        return 'bg-yellow-50 text-yellow-900 border border-yellow-200';
+        return '';
       case 'agent':
-        return 'bg-gray-100 text-gray-900';
+        return '';
       case 'workshop':
-        return 'bg-blue-600 text-white';
+        return '';
       default:
-        return 'bg-gray-100 text-gray-900';
+        return '';
     }
   };
 
