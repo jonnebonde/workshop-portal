@@ -47,9 +47,9 @@ const InsuranceCoverageSection: React.FC<InsuranceCoverageSectionProps> = ({ cas
     if (!coverageStatus || coverageStatus === 'undefined') {
       return {
         text: 'Pending',
-        color: 'text-yellow-700',
-        bgColor: 'bg-yellow-50',
-        borderColor: 'border-yellow-200'
+        color: 'text-yellow-500',
+        bgColor: '',
+        borderColor: 'border-yellow-500'
       };
     } else if (coverageStatus === 'approved') {
       return {
@@ -79,16 +79,16 @@ const InsuranceCoverageSection: React.FC<InsuranceCoverageSectionProps> = ({ cas
         Changes to SectionWrapper's badge text will NOT affect these displays
       */}
       {!coverage?.dataFetched || !coverage?.status || coverage.status === 'undefined' ? (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <div className="border border-yellow-500 rounded-lg p-4">
           <div className="flex items-center justify-center">
-            <span className="text-sm text-yellow-700 font-medium">Insurance coverage not verified yet</span>
+            <span className="text-sm text-yellow-500 font-medium">Insurance coverage not verified yet</span>
           </div>
         </div>
       ) : coverage.status === 'not_approved' ? (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4">
           <div className="flex items-center justify-center">
             <span className="text-sm text-red-700 font-medium">
-              {coverage.denialReason || 'Insurance coverage has been denied. because of some reason that will be described in this text.'}
+              Insurance coverage has been denied. because of some reason that will be described in this text.
             </span>
           </div>
         </div>

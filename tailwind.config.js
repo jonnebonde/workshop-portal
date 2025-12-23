@@ -5,7 +5,7 @@ const brandColors = {
   brandBackground: '#F9FBFD',
   brandSurface: '#FFFFFF',
   semanticSuccess: '#00D97E',
-  semanticWarning: '#F5D83E',
+  semanticWarning: '#FA9A00',
   semanticDanger: '#E63757',
   semanticInfo: '#2C7BE5',
   neutral900: '#283E59',
@@ -111,7 +111,7 @@ export default {
         900: '#163e72',
       },
       orange: {
-        50: '#fefdf5',
+        50: '#fffdeeff',
         100: '#fefbec',
         200: '#fdf7d8',
         300: '#fcf1bb',

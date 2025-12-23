@@ -62,19 +62,19 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({
         };
       } else if (approvalStatus === 'ready_for_approval') {
         return {
-          titleColor: 'text-yellow-600',
-          iconColor: 'text-yellow-600',
+          titleColor: 'text-yellow-500',
+          iconColor: 'text-yellow-500',
           borderColor: '',
-          badgeColor: 'bg-yellow-100 text-yellow-800',
+          badgeColor: 'bg-yellow-100 text-yellow-500',
           badgeText: 'Ready for Approval',
           showBadge: true
         };
       } else {
         return {
-          titleColor: 'text-yellow-600',
-          iconColor: 'text-yellow-600',
-          borderColor: 'ring-2 ring-yellow-400',
-          badgeColor: 'bg-yellow-100 text-yellow-800',
+          titleColor: 'text-yellow-500',
+          iconColor: 'text-yellow-500',
+          borderColor: 'ring-2 ring-yellow-500',
+          badgeColor: 'bg-yellow-100 text-yellow-500',
           badgeText: 'Incomplete',
           showBadge: true
         };
@@ -103,19 +103,19 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({
         };
       } else if (insuranceStatus === 'undefined') {
         return {
-          titleColor: 'text-yellow-600',
-          iconColor: 'text-yellow-600',
+          titleColor: 'text-yellow-500',
+          iconColor: 'text-yellow-500',
           borderColor: 'ring-2 ring-yellow-500',
-          badgeColor: 'bg-yellow-100 text-yellow-800',
+           badgeColor: 'bg-yellow-100 text-yellow-500',
           badgeText: 'Incomplete',
           showBadge: true
         };
       } else {
         return {
-          titleColor: 'text-yellow-600',
-          iconColor: 'text-yellow-600',
+          titleColor: 'text-yellow-500',
+          iconColor: 'text-yellow-500',
           borderColor: 'ring-2 ring-yellow-500',
-          badgeColor: 'bg-yellow-100 text-yellow-800',
+        badgeColor: 'bg-yellow-100 text-yellow-500',
           badgeText: 'Incomplete',
           showBadge: true
         };
@@ -145,9 +145,9 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({
       };
     } else if (isRequired) {
       return {
-        titleColor: 'text-yellow-600',
-        iconColor: 'text-yellow-600',
-        borderColor: 'ring-2 ring-yellow-400',
+        titleColor: 'text-yellow-500',
+        iconColor: 'text-yellow-500',
+        borderColor: 'ring-2 ring-yellow-500',
         badgeColor: 'bg-yellow-100 text-yellow-800',
         badgeText: 'Incomplete',
         showBadge: true

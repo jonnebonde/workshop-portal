@@ -321,17 +321,17 @@ const ImageSection: React.FC<ImageSectionProps> = ({
           <div className={`rounded-md p-4 ${
             statusMessage.type === 'info'
               ? 'bg-blue-50 border border-blue-200'
-              : 'bg-yellow-50 border border-yellow-200'
+              : ' border border-yellow-500'
           }`}>
             <div className="flex">
               {statusMessage.type === 'info' ? (
                 <MessageSquare className="h-5 w-5 text-blue-400" />
               ) : (
-                <Camera className="h-5 w-5 text-yellow-400" />
+                <Camera className="h-5 w-5 text-yellow-500" />
               )}
               <div className="ml-3">
                 <p className={`text-sm font-medium ${
-                  statusMessage.type === 'info' ? 'text-blue-800' : 'text-yellow-800'
+                  statusMessage.type === 'info' ? 'text-blue-800' : 'text-yellow-500'
                 }`}>
                   {statusMessage.message}
                 </p>

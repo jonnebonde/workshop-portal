@@ -118,7 +118,7 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = ({ caseData }) => {
               ) : section.isComplete ? (
                 <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
               ) : section.isRequired ? (
-                <Circle className="h-4 w-4 text-yellow-600 flex-shrink-0" />
+                <Circle className="h-4 w-4 text-yellow-500 flex-shrink-0" />
               ) : (
                 <Circle className="h-4 w-4 text-gray-400 flex-shrink-0" />
               )}
