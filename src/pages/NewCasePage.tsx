@@ -35,7 +35,7 @@ const NewCasePage: React.FC = () => {
                   placeholder="Enter VRN (e.g., 12 CDE)"
                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10 ${
                     lookupError ? 'border-red-300 bg-red-50' : 
-                    hasValidData ? 'border-green-300 bg-green-50' : 
+                    hasValidData ? 'border-green-300 ' : 
                     'border-gray-300'
                   }`}
                   disabled={isLooking}
