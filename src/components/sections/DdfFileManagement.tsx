@@ -97,8 +97,8 @@ const DdfFileManagement: React.FC<DdfFileManagementProps> = ({
   };
 
   // Handle SMS send
-  const handleSendSms = () => {
-    addDdfSmsLog(caseData.id, caseData.customer.phone);
+  const handleSendSms = (details: { phoneNumber: string }) => {
+    addDdfSmsLog(caseData.id, details.phoneNumber);
     // Refresh the case data to reflect the changes
     const updatedCase = getCaseById(caseData.id);
     if (updatedCase) {
@@ -297,6 +297,7 @@ const DdfFileManagement: React.FC<DdfFileManagementProps> = ({
         onClose={() => setIsSmsModalOpen(false)}
         onConfirm={handleSendSms}
         phoneNumber={caseData.customer.phone}
+        isPhoneEditable={false}
       />
     </SectionWrapper>
   );

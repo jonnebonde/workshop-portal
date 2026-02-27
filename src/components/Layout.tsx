@@ -10,6 +10,7 @@ import {
   X, 
   ChevronDown,
   Plus,
+  MessageSquare
 } from 'lucide-react';
 import ChatbotButton from './ChatbotButton';
 import CreateCaseFab from './CreateCaseFab';
@@ -177,6 +178,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             >
          
               News
+            </NavLink>
+
+            <NavLink 
+              to="/send-ddf-sms" 
+              className={({ isActive }) => 
+                `flex items-center px-3 py-2.5 text-sm rounded-lg transition-all duration-200 ${
+                  isActive 
+                    ? 'bg-blue-700 text-white shadow-sm' 
+                    : 'text-blue-100 hover:bg-blue-700 hover:text-white hover:shadow-sm'
+                }`
+              }
+            >
+              Send DDF SMS
             </NavLink>
           </nav>
         </div>
