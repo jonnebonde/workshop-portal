@@ -1,146 +1,146 @@
-# News Page UX/UI-spec
+# News Page UX/UI spec
 
-## Formål
+## Purpose
 
-`/news` er en enkel nyhetsflate for verkstedbrukere. Siden skal gjøre det lett å:
+`/news` is a simple news page for workshop users. The page should make it easy to:
 
-- se hvilke nyheter som finnes
-- forstå hvilke nyheter som er nye/uleste
-- åpne en nyhet i en modal uten å forlate siden
-- bekrefte at en nyhet er lest
-- laste ned eventuelle vedlegg
+- see which news messages exist
+- understand which messages are new or unread
+- open a message in a modal without leaving the page
+- confirm that an important message has been read
+- download any attachments
 
-Dette er per nå en mockup for å vise ønsket UX/UI til utviklere. Den bruker lokal mockdata og lokal state i komponenten.
+This is currently a mockup used to show intended UX/UI to developers. It uses local mock data and local component state.
 
-## Sideoppsett
+## Page layout
 
-Siden består av:
+The page consists of:
 
-- en toppseksjon med tittel `News`
-- en kortliste med alle nyheter
-- en empty state hvis listen er tom
-- en modal som åpnes når bruker trykker `View`
+- a top section with the title `News`
+- a card list with all news messages
+- an empty state if the list is empty
+- a modal that opens when the user clicks `View`
 
-Hver nyhet vises som et kort med:
+Each news card currently shows:
 
-- tittel
-- statusbadge
-- publiseringsdato
-- kort oppsummering
-- innholdstekst
-- eventuell ekstern lenke
-- knapp for å åpne nyheten i modal
+- title
+- status badge
+- published date
+- button to open the message in a modal
 
-## Kortlisten
+## Card list
 
-Kortlisten skal gi rask oversikt uten å kreve navigasjon til egen detaljside.
+The card list should give a quick overview without requiring navigation to a separate detail page.
 
-Forventet UX:
+Expected UX:
 
-- uleste nyheter skal være tydelig markert
-- brukeren åpner nyheten via `View`
-- listen beholdes i bakgrunnen mens modal er åpen
+- unread messages should be clearly marked
+- the user opens a message via `View`
+- the list remains visible in the background while the modal is open
 
-Nåværende mockup-logikk:
+Current mockup logic:
 
-- ulest nyhet viser badge `New message`
-- lest nyhet styres av `confirmedRead[newsItem.id]`
+- an unread message shows the badge `New message`
+- read state is controlled by `confirmedRead[newsItem.id]`
+- when a non-important message is closed from the modal, it is marked as read and the badge is removed from the list
+- important messages keep the `New message` badge until the user explicitly clicks `Confirm read`
 
-Merk:
+Note:
 
-- i dagens kode rendres badge for lest nyhet uten tekst på kortet. Utvikler bør erstatte dette med en tydelig label, for eksempel `Read` eller `Confirmed`.
+- the current code renders a read badge container without visible text on the card. That should be replaced with a clear label such as `Read` or `Confirmed`.
 
-## Modal for nyhet
+## News modal
 
-Når brukeren trykker `View`, åpnes en sentrert modal over siden.
+When the user clicks `View`, a centered modal opens above the page.
 
-Modalen inneholder:
+The modal contains:
 
-- lukkeknapp øverst til høyre
-- tittel
-- statusbadge (`Unconfirmed` eller `Confirmed`)
-- publiseringsdato
-- summary
-- fullt innhold
-- valgfritt bilde
-- vedlegg med `Download`-knapp
-- `Bekreft lest`-knapp nederst i innholdet
+- close button in the top-right corner
+- title
+- published date
+- full content
+- optional image
+- attachments with a `Download` button
+- one footer action button whose label depends on message type and read state
 
-### Viktig UX-intensjon
+### UX intent
 
-Nyheten skal ikke åpne en ny side. Hele leseopplevelsen skal skje i modalen.
+The message should not open on a new page. The full reading flow should happen in the modal.
 
-Det gjør at:
+That means:
 
-- brukeren beholder konteksten fra listen
-- gjennomlesning går raskere
-- det er tydelig at `Bekreft lest` hører til akkurat den åpne nyheten
+- the user keeps the context from the list
+- reading is faster
+- the message action is clearly tied to the currently open item
 
-## Bekreft lest
+## Important vs non-important messages
 
-`Bekreft lest` er en eksplisitt handling brukeren må gjøre etter å ha lest nyheten.
+Messages can be marked as important with `isImportant: true` or left as non-important.
 
-Forventet oppførsel:
+Expected behavior:
 
-- knappen skal alltid være visuelt tydelig plassert nederst i nyhetsmodalen
-- knappen skal ikke lukke modalen når den trykkes
-- trykk på knappen skal markere nyheten som lest
-- etter bekreftelse skal knappen bli disabled for å hindre dobbel handling
-- knappetekst endres til `Lest bekreftet`
+- the footer action should always be clearly placed at the bottom of the modal
+- important messages should show `Confirm read` first
+- clicking `Confirm read` should mark the message as read but should not close the modal
+- after confirmation, the footer action should change to `Close`
+- non-important messages should not show `Confirm read`
+- non-important messages should show `Close` immediately in the same button position
+- closing a non-important message should mark it as read and remove `New message` from the list
+- the top-right `X` should have the same effect as `Close` for non-important messages
 
-Dette gir tydelig feedback uten at brukeren mister innholdet.
+This separates messages that require explicit acknowledgement from messages that only need to be read and dismissed.
 
-## Vedlegg
+## Attachments
 
-Vedlegg vises som en enkel liste i modalen.
+Attachments are shown as a simple list in the modal.
 
-Forventet UX:
+Expected UX:
 
-- filnavn skal være lesbart
-- hver fil skal ha en tydelig `Download`-knapp
-- nedlasting er sekundær handling og skal ikke konkurrere visuelt med `Bekreft lest`
+- file names should be readable
+- each file should have a clear `Download` button
+- downloading is a secondary action and should not compete visually with the footer action
 
 ## Empty state
 
-Hvis det ikke finnes nyheter, skal siden vise:
+If there are no news messages, the page should show:
 
-- ikon
-- overskrift `No news available`
-- hjelpetekst om å komme tilbake senere
+- icon
+- heading `No news available`
+- helper text telling the user to check back later
 
-Dette hindrer at siden oppleves som tom eller ødelagt.
+This prevents the page from feeling empty or broken.
 
-## Nåværende teknisk implementasjon
+## Current technical implementation
 
-I dagens mockup ligger logikken i `src/pages/NewsPage.tsx`.
+The current mockup logic lives in `src/pages/NewsPage.tsx`.
 
 State:
 
-- `selectedNewsId`: styrer hvilken nyhet som er åpen i modal
-- `confirmedRead`: lokal map med lest-status per nyhets-ID
+- `selectedNewsId`: controls which message is open in the modal
+- `confirmedRead`: local map of read status per message ID
 
 Data:
 
-- nyheter kommer fra lokal konstant `mockNews`
-- det finnes foreløpig ingen backend-kobling
+- messages come from the local `mockNews` constant
+- there is currently no backend integration
 
 Routing:
 
-- siden er tilgjengelig på `/news`
-- modal åpnes internt i komponenten, ikke via egen route
+- the page is available on `/news`
+- the modal is handled inside the page component, not through a dedicated route
 
-## Anbefalinger til utvikling
+## Development recommendations
 
-Ved reell implementasjon bør utvikler vurdere:
+For a production implementation, developers should consider:
 
-- hente nyheter fra API i stedet for mockdata
-- persistere lest-status per bruker
-- støtte filter for `all`, `unread`, `read`
-- bruke mer konsistent språkvalg i UI, enten norsk eller engelsk
-- gjøre statuslabel på kort og i modal helt konsistent
-- vurdere om modaltilstand skal kunne deep-linkes med query parameter eller route state
+- fetching messages from an API instead of mock data
+- persisting read state per user
+- supporting filters such as `all`, `unread`, and `read`
+- using one consistent language in the UI
+- making status labels fully consistent across cards and modal states
+- deciding whether modal state should be deep-linkable via query params or route state
 
-## Filreferanser
+## File references
 
 - `src/pages/NewsPage.tsx`
 - `src/App.tsx`

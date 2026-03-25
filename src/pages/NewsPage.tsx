@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Newspaper, ExternalLink, X, Download, Check } from 'lucide-react';
+import { Newspaper, X, Download } from 'lucide-react';
 
 interface NewsItem {
   id: string;
@@ -47,6 +47,7 @@ const mockNews: NewsItem[] = [
     summary: 'System maintenance scheduled for January 20th from 02:00 to 04:00 CET.',
     content: 'We will be performing scheduled maintenance on January 20th from 02:00 to 04:00 CET. During this time, the system may be temporarily unavailable. We apologize for any inconvenience.',
     publishedAt: '2024-01-10T09:00:00Z',
+    isImportant: true,
     imageUrl: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80',
     attachments: [
       { name: 'Maintenance-window.pdf', url: 'https://example.com/maintenance-window.pdf' },
@@ -90,6 +91,16 @@ const NewsPage: React.FC = () => {
     () => mockNews.find((item) => item.id === selectedNewsId) || null,
     [selectedNewsId]
   );
+  const selectedNewsIsConfirmed = selectedNews ? confirmedRead[selectedNews.id] : false;
+  const selectedNewsIsImportant = selectedNews?.isImportant ?? false;
+
+  const handleCloseNewsModal = () => {
+    if (selectedNews && !selectedNews.isImportant) {
+      setConfirmedRead((prev) => ({ ...prev, [selectedNews.id]: true }));
+    }
+
+    setSelectedNewsId(null);
+  };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('nb-NO', {
@@ -169,7 +180,7 @@ const NewsPage: React.FC = () => {
           <div className="relative flex w-full max-w-2xl max-h-[85vh] min-h-0 flex-col overflow-hidden rounded-lg bg-white shadow-xl">
             <button
               type="button"
-              onClick={() => setSelectedNewsId(null)}
+              onClick={handleCloseNewsModal}
               className="absolute right-4 top-4 rounded-full p-2 text-gray-500 hover:bg-gray-100"
               aria-label="Close"
             >
@@ -222,21 +233,26 @@ const NewsPage: React.FC = () => {
                   </div>
                 )}
 
-                <div className="mt-6 flex items-center justify-end  pt-4">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setConfirmedRead((prev) => ({ ...prev, [selectedNews.id]: true }));
-                    }}
-                    disabled={confirmedRead[selectedNews.id]}
-                    className={`inline-flex items-center rounded-md px-4 py-2 text-sm font-semibold text-white ${
-                      confirmedRead[selectedNews.id]
-                        ? 'cursor-not-allowed bg-gray-300 hidden'
-                        : 'bg-brand-primary hover:opacity-90'
-                    }`}
-                  >
-                    {confirmedRead[selectedNews.id] ? 'Confirmed' : 'Confirm read'}
-                  </button>
+                <div className="mt-6 flex items-center justify-end pt-4">
+                  {selectedNewsIsImportant && !selectedNewsIsConfirmed ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setConfirmedRead((prev) => ({ ...prev, [selectedNews.id]: true }));
+                      }}
+                      className="inline-flex items-center rounded-md bg-brand-primary px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+                    >
+                      Confirm read
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={handleCloseNewsModal}
+                      className="inline-flex items-center rounded-md bg-brand-primary px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+                    >
+                      Close
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
