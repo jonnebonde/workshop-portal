@@ -93,7 +93,7 @@ const NewsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 px-6 py-6 bg-background">
+    <div className="space-y-8 px-6 py-6 bg-background max-w-4xl mx-auto">
       {/* Header */}
       <div className="space-y-2">
        
@@ -106,8 +106,8 @@ const NewsPage: React.FC = () => {
         {mockNews.map((newsItem) => (
           <article
             key={newsItem.id}
-            className="border-blue-500 bg-white shadow-sm hover:shadow-md p-6 rounded-lg" >
-            <div className="flex items-start justify-between mb-4">
+            className="border-blue-500 bg-white shadow-sm hover:shadow-md p-4 rounded-lg" >
+            <div className="mb-4 flex items-stretch justify-between gap-4">
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
                   <h2 className="text-xl font-semibold text-brand-dark">
@@ -125,32 +125,24 @@ const NewsPage: React.FC = () => {
                   )}
                 </div>
 
-                <div className="flex items-center space-x-4 text-sm text-gray-600 mb-3">
+                <div className="flex items-center space-x-4 text-sm text-gray-600 ">
                   <div className="flex items-center">
                     Published: {formatDate(newsItem.publishedAt)}
                   </div>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={() => setSelectedNewsId(newsItem.id)}
-                className="shrink-0 rounded-md bg-brand-primary px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
-              >
-                View
-              </button>
+              <div className="flex shrink-0 items-end">
+                <button
+                  type="button"
+                  onClick={() => setSelectedNewsId(newsItem.id)}
+                  className="rounded-md bg-brand-primary px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+                >
+                  View
+                </button>
+              </div>
             </div>
-
-            <div className="space-y-3">
-              <p className="text-gray-700 font-medium">
-                {newsItem.summary}
-              </p>
-
-              <p className="text-gray-600 leading-relaxed">
-                {newsItem.content}
-              </p>
 
           
-            </div>
           </article>
         ))}
       </div>
@@ -166,7 +158,7 @@ const NewsPage: React.FC = () => {
 
       {selectedNews && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-          <div className="relative flex w-full max-w-2xl max-h-[85vh] min-h-0 flex-col overflow-hidden rounded-2xl bg-white shadow-xl">
+          <div className="relative flex w-full max-w-2xl max-h-[85vh] min-h-0 flex-col overflow-hidden rounded-lg bg-white shadow-xl">
             <button
               type="button"
               onClick={() => setSelectedNewsId(null)}
@@ -186,8 +178,8 @@ const NewsPage: React.FC = () => {
                   <p className="text-xs text-gray-500">Published: {formatDate(selectedNews.publishedAt)}</p>
                 </div>
 
-                <p className="text-gray-700">{selectedNews.summary}</p>
-                <p className="text-gray-600 leading-relaxed">{selectedNews.content}</p>
+        
+                <p className="text-gray-900 leading-relaxed">{selectedNews.content}</p>
 
                 {selectedNews.imageUrl && (
                   <div className="overflow-hidden rounded-xl border border-gray-200">
