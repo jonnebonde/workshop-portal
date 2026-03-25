@@ -5,6 +5,7 @@ import CaseDetail from './pages/CaseDetail';
 import NewsPage from './pages/NewsPage';
 import SettingsPage from './pages/SettingsPage';
 import NewCasePage from './pages/NewCasePage';
+import SendDdfSmsPage from './pages/SendDdfSmsPage';
 import Layout from './components/Layout';
 import { AuthProvider } from './context/AuthContext';
 import './index.css';
@@ -27,6 +28,11 @@ function App() {
           <Route path="/news" element={
             <Layout>
               <NewsPage />
+            </Layout>
+          } />
+          <Route path="/send-ddf-sms" element={
+            <Layout>
+              <SendDdfSmsPage />
             </Layout>
           } />
           <Route path="/settings" element={

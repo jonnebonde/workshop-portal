@@ -82,7 +82,7 @@ const Dashboard: React.FC = () => {
     setSearchParams({ tab: tabId });
     setSearchTerm('');
   };
-  
+
 
   return ( 
     <div className="space-y-2 py-4 my-4 px-6">
@@ -90,6 +90,9 @@ const Dashboard: React.FC = () => {
       {/* Sticky Search and Tabs Container */} 
       <div className="sticky top-0 bg-gray-50 pb-4 z-10">
         <div className=" sm:px-0">
+          <div className="flex items-center justify-between mb-3">
+            <h1 className="text-lg font-semibold text-gray-900">Cases</h1>
+          </div>
           <div className="bg-white rounded-lg shadow-sm border border-gray-300 overflow-hidden mb-4">
             {/* Search Bar */}
             <TableToolbar
