@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { 
   LayoutDashboard, 
@@ -23,11 +23,11 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
   const [searchParams] = useSearchParams();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+  const hasUnreadNewsNotification = true;
   
   const handleLogout = () => {
     logout();
@@ -169,15 +169,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <NavLink 
               to="/news" 
               className={({ isActive }) => 
-                `flex items-center px-3 py-2.5 text-sm rounded-lg transition-all duration-200 ${
+                `flex items-center justify-between px-3 py-2.5 text-sm rounded-lg transition-all duration-200 ${
                   isActive 
                     ? 'bg-blue-700 text-white shadow-sm' 
                     : 'text-blue-100 hover:bg-blue-700 hover:text-white hover:shadow-sm'
                 }`
               }
             >
-         
-              News
+              <span>News</span>
+              {hasUnreadNewsNotification && (
+                <span className="ml-3 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
+                  1
+                </span>
+              )}
             </NavLink>
 
             <NavLink 

@@ -69,7 +69,7 @@ const mockNews: NewsItem[] = [
     attachments: [
       { name: 'Beta-program.pdf', url: 'https://example.com/beta-program.pdf' }
     ],
-    externalLink: 'https://example.com/beta-signup'
+   
   }
 ];
 
@@ -115,12 +115,12 @@ const NewsPage: React.FC = () => {
                   </h2>
                   {!confirmedRead[newsItem.id] && (
                     <span className="inline-flex items-center rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-semibold text-amber-800">
-                      New
+                     New message
                     </span>
                   )}
                   {confirmedRead[newsItem.id] && (
                     <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">
-                      Read
+                      
                     </span>
                   )}
                 </div>
@@ -149,19 +149,7 @@ const NewsPage: React.FC = () => {
                 {newsItem.content}
               </p>
 
-              {newsItem.externalLink && (
-                <div className="pt-3 border-t border-gray-200">
-                  <a
-                    href={newsItem.externalLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-brand-primary hover:text-blue-700 text-sm font-semibold"
-                  >
-                    Learn more
-                    <ExternalLink className="h-4 w-4 ml-1" />
-                  </a>
-                </div>
-              )}
+          
             </div>
           </article>
         ))}
@@ -178,7 +166,7 @@ const NewsPage: React.FC = () => {
 
       {selectedNews && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-          <div className="relative flex w-full max-w-2xl max-h-[85vh] flex-col overflow-hidden rounded-2xl bg-white shadow-xl">
+          <div className="relative flex w-full max-w-2xl max-h-[85vh] min-h-0 flex-col overflow-hidden rounded-2xl bg-white shadow-xl">
             <button
               type="button"
               onClick={() => setSelectedNewsId(null)}
@@ -188,34 +176,12 @@ const NewsPage: React.FC = () => {
               <X className="h-5 w-5" />
             </button>
 
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="min-h-0 flex-1 overflow-y-auto p-6">
               <div className="space-y-4">
                 <div className="space-y-2">
                   <div className="flex flex-wrap items-center gap-2">
                     <h3 className="text-lg font-semibold text-brand-dark">{selectedNews.title}</h3>
-                    {!confirmedRead[selectedNews.id] && (
-                      <span className="inline-flex items-center rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-semibold text-amber-800">
-                        Unconfirmed
-                      </span>
-                    )}
-                    {confirmedRead[selectedNews.id] && (
-                      <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">
-                        Read
-                      </span>
-                    )}
-                    {!confirmedRead[selectedNews.id] && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setConfirmedRead((prev) => ({ ...prev, [selectedNews.id]: true }));
-                          setSelectedNewsId(null);
-                        }}
-                        className="ml-auto inline-flex items-center rounded-md bg-emerald-500 px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
-                      >
-                        Confirm Read
-                        <Check className="ml-2 h-4 w-4" />
-                      </button>
-                    )}
+                  
                   </div>
                   <p className="text-xs text-gray-500">Published: {formatDate(selectedNews.publishedAt)}</p>
                 </div>
@@ -255,24 +221,25 @@ const NewsPage: React.FC = () => {
                     </div>
                   </div>
                 )}
+
+                <div className="mt-6 flex items-center justify-end  pt-4">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setConfirmedRead((prev) => ({ ...prev, [selectedNews.id]: true }));
+                    }}
+                    disabled={confirmedRead[selectedNews.id]}
+                    className={`inline-flex items-center rounded-md px-4 py-2 text-sm font-semibold text-white ${
+                      confirmedRead[selectedNews.id]
+                        ? 'cursor-not-allowed bg-gray-300 hidden'
+                        : 'bg-brand-primary hover:opacity-90'
+                    }`}
+                  >
+                    {confirmedRead[selectedNews.id] ? 'Confirmed' : 'Confirm read'}
+                  </button>
+                </div>
               </div>
             </div>
-
-            {!confirmedRead[selectedNews.id] && (
-              <div className="sticky bottom-0 flex items-center justify-end border-t border-gray-200 bg-white/95 px-6 py-4 backdrop-blur">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setConfirmedRead((prev) => ({ ...prev, [selectedNews.id]: true }));
-                    setSelectedNewsId(null);
-                  }}
-                  className="inline-flex items-center rounded-md bg-emerald-500 px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
-                >
-                  Confirm Read
-                  <Check className="ml-2 h-4 w-4" />
-                </button>
-              </div>
-            )}
           </div>
         </div>
       )}
