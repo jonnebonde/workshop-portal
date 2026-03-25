@@ -23,7 +23,9 @@ const mockNews: NewsItem[] = [
     publishedAt: '2024-01-15T10:00:00Z',
     imageUrl: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
     attachments: [
-      { name: 'Release-notes.pdf', url: 'https://example.com/release-notes.pdf' }
+      { name: 'Release-notes.pdf', url: 'https://example.com/release-notes.pdf' },
+      { name: 'Technical-overview.pdf', url: 'https://example.com/technical-overview.pdf' },
+      { name: 'Workshop-rollout-plan.xlsx', url: 'https://example.com/workshop-rollout-plan.xlsx' }
     ]
   },
   {
@@ -34,7 +36,9 @@ const mockNews: NewsItem[] = [
     publishedAt: '2024-01-12T14:30:00Z',
     imageUrl: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80',
     attachments: [
-      { name: 'Integration-guide.pdf', url: 'https://example.com/integration-guide.pdf' }
+      { name: 'Integration-guide.pdf', url: 'https://example.com/integration-guide.pdf' },
+      { name: 'API-field-mapping.pdf', url: 'https://example.com/api-field-mapping.pdf' },
+      { name: 'Error-handling-checklist.docx', url: 'https://example.com/error-handling-checklist.docx' }
     ]
   },
   {
@@ -45,7 +49,8 @@ const mockNews: NewsItem[] = [
     publishedAt: '2024-01-10T09:00:00Z',
     imageUrl: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80',
     attachments: [
-      { name: 'Maintenance-window.pdf', url: 'https://example.com/maintenance-window.pdf' }
+      { name: 'Maintenance-window.pdf', url: 'https://example.com/maintenance-window.pdf' },
+      { name: 'Affected-services.pdf', url: 'https://example.com/affected-services.pdf' }
     ]
   },
   {
@@ -56,7 +61,9 @@ const mockNews: NewsItem[] = [
     publishedAt: '2024-01-08T11:15:00Z',
     imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
     attachments: [
-      { name: 'KPI-dashboard.pdf', url: 'https://example.com/kpi-dashboard.pdf' }
+      { name: 'KPI-dashboard.pdf', url: 'https://example.com/kpi-dashboard.pdf' },
+      { name: 'Reporting-examples.pdf', url: 'https://example.com/reporting-examples.pdf' },
+      { name: 'Filter-reference-sheet.xlsx', url: 'https://example.com/filter-reference-sheet.xlsx' }
     ]
   },
   {
@@ -67,7 +74,9 @@ const mockNews: NewsItem[] = [
     publishedAt: '2024-01-05T16:45:00Z',
     imageUrl: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80',
     attachments: [
-      { name: 'Beta-program.pdf', url: 'https://example.com/beta-program.pdf' }
+      { name: 'Beta-program.pdf', url: 'https://example.com/beta-program.pdf' },
+      { name: 'Test-device-requirements.pdf', url: 'https://example.com/test-device-requirements.pdf' },
+      { name: 'Feedback-template.docx', url: 'https://example.com/feedback-template.docx' }
     ],
    
   }
@@ -98,9 +107,8 @@ const NewsPage: React.FC = () => {
       <div className="space-y-2">
        
         <h1 className="text-3xl font-bold text-brand-dark">News</h1>
-        <p className="text-gray-700 max-w-3xl">Latest updates and announcements related to the platform and workshop operations</p>
+        <p className="text-gray-700 max-w-3xl">Latest updates and announcements</p>
       </div>
-
       {/* News List */}
       <div className="space-y-6">
         {mockNews.map((newsItem) => (
