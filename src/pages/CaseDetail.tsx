@@ -7,6 +7,8 @@ import {
   deleteCase,
   addDdfAttachmentToCase,
   addInvoiceAttachmentToCase,
+  addCalibrationFileToCase,
+  deleteCalibrationFile,
   getCaseById,
   isCaseReadyForInProgress,
   isCaseReadyForCompletion,
@@ -215,6 +217,24 @@ const CaseDetail: React.FC = () => {
           setCaseData(updatedCase);
         }
       }
+    }
+  };
+
+  const handleCalibrationUpload = (file: File) => {
+    if (!caseData?.id) return;
+    const fileUrl = URL.createObjectURL(file);
+    const attachment = addCalibrationFileToCase(caseData.id, file.name, fileUrl, file.size);
+    if (attachment) {
+      const updatedCase = getCaseById(caseData.id);
+      if (updatedCase) setCaseData(updatedCase);
+    }
+  };
+
+  const handleCalibrationDelete = (fileId: string) => {
+    if (!caseData?.id) return;
+    if (deleteCalibrationFile(caseData.id, fileId)) {
+      const updatedCase = getCaseById(caseData.id);
+      if (updatedCase) setCaseData(updatedCase);
     }
   };
 
@@ -472,6 +492,8 @@ const CaseDetail: React.FC = () => {
                 <CalibrationSection
                   caseData={caseData}
                   onUpdate={handleUpdateCase}
+                  onFileUpload={handleCalibrationUpload}
+                  onDeleteFile={handleCalibrationDelete}
                   isSectionComplete={isCalibrationComplete}
                   approvalStatus={calibrationApprovalStatus}
                 />

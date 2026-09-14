@@ -119,8 +119,14 @@ export interface ActionLogEntry {
 }
 
 export interface Calibration {
+  pidRequiresCalibration?: boolean;
+  arRequiresCalibration?: boolean;
+  calibrationType?: 'dynamic' | 'static';
   required?: boolean;
   notNeeded?: boolean;
+  workshopDisagrees?: boolean;
+  workshopRequiresCalibration?: boolean;
+  comment?: string;
   signature?: string;
   confirmed?: boolean;
   files?: Attachment[];
@@ -936,7 +942,22 @@ const randomMockCases: WorkshopCase[] = Array.from({ length: 28 }, (_, index) =>
 }).map(ensureCompletedCaseHasDocuments); // Ensure completed cases have all documents
 
 // Combine comprehensive cases (showcasing all variants) with random cases
-const mockCases: WorkshopCase[] = [...comprehensiveMockCases, ...randomMockCases];
+const mockCases: WorkshopCase[] = [...comprehensiveMockCases, ...randomMockCases].map(caseItem => {
+  const calibration = caseItem.calibration;
+
+  if (calibration?.pidRequiresCalibration !== undefined || calibration?.arRequiresCalibration !== undefined) {
+    return caseItem;
+  }
+
+  return {
+    ...caseItem,
+    calibration: {
+      ...calibration,
+      pidRequiresCalibration: calibration?.required === true,
+      arRequiresCalibration: false
+    }
+  };
+});
 
 export const getCases = () => mockCases;
 
@@ -1115,15 +1136,23 @@ export const hasPartsAndLaborComplete = (caseItem: WorkshopCase | null | undefin
 export const hasCalibrationComplete = (caseItem: WorkshopCase | null | undefined): boolean => {
   if (!caseItem) return false;
 
-  if (caseItem.calibration?.notNeeded) return true;
+  const calibration = caseItem.calibration;
+  if (!calibration) return false;
 
-  if (caseItem.calibration?.required) {
-    const hasSignature = caseItem.calibration?.signature && caseItem.calibration.signature.trim() !== '';
-    const hasFiles = caseItem.calibration?.files && caseItem.calibration.files.length > 0;
-    return hasSignature && hasFiles;
+  const sourceRequiresCalibration = calibration.pidRequiresCalibration === true || calibration.arRequiresCalibration === true;
+  const workshopRequiresCalibration = calibration.workshopRequiresCalibration === true;
+  const workshopDisagrees = calibration.workshopDisagrees === true;
+  const calibrationRequired = sourceRequiresCalibration ? !workshopDisagrees : workshopRequiresCalibration;
+
+  if (sourceRequiresCalibration && workshopDisagrees) {
+    return !!calibration.comment?.trim();
   }
 
-  return false;
+  if (!calibrationRequired) return true;
+
+  const hasSignature = calibration.signature && calibration.signature.trim() !== '';
+  const hasFiles = calibration.files && calibration.files.length > 0;
+  return !!hasSignature && !!hasFiles;
 };
 
 export const getInsuranceCoverageStatus = (caseItem: WorkshopCase | null | undefined): 'approved' | 'not_approved' | 'undefined' | 'not_fetched' => {
