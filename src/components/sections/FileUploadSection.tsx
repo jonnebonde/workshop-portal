@@ -19,6 +19,8 @@ interface FileUploadSectionProps {
     type?: string;
   }>;
   onDeleteFile?: (fileId: string) => void;
+  uploadPrompt?: string;
+  uploadHint?: string;
 }
 
 const FileUploadSection: React.FC<FileUploadSectionProps> = ({
@@ -28,7 +30,9 @@ const FileUploadSection: React.FC<FileUploadSectionProps> = ({
   multiple = false,
   isImageUpload = false,
   existingFiles = [],
-  onDeleteFile
+  onDeleteFile,
+  uploadPrompt,
+  uploadHint
 }) => {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -234,10 +238,10 @@ const FileUploadSection: React.FC<FileUploadSectionProps> = ({
         >
           <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
           <p className="text-sm text-gray-600 mb-2">
-            Drop {fileTypeLabel} here or click to browse
+            {uploadPrompt || `Drop ${fileTypeLabel} here or click to browse`}
           </p>
           <p className="text-xs text-gray-500">
-            Drag and drop or click
+            {uploadHint || 'Drag and drop or click'}
           </p>
 
           <input

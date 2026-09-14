@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Bug, Settings } from 'lucide-react';
 import { WorkshopCase, SectionApprovalStatus } from '../../data/mockData';
 import SectionWrapper from './SectionWrapper';
 import FileUploadSection from './FileUploadSection';
@@ -40,14 +39,14 @@ const CalibrationSection: React.FC<CalibrationSectionProps> = ({ caseData, onUpd
   return (
     <SectionWrapper title="Calibration" isRequired={true} isComplete={isComplete} isSectionComplete={isSectionComplete} approvalStatus={approvalStatus}>
       <div className="space-y-4">
-        <div className="flex items-center justify-between border-b border-gray-200 pb-3">
-          <button type="button" onClick={() => setIsDeveloperMode(prev => !prev)} className={`inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm font-semibold transition-colors ${isDeveloperMode ? 'border-amber-500 bg-amber-500 text-gray-950 shadow-sm' : 'border-gray-300 bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-            <Bug className="h-4 w-4" /> Developer mode
+        <div className="flex justify-end">
+          <button type="button" onClick={() => setIsDeveloperMode(prev => !prev)} className={`rounded-md border px-3 py-2 text-sm font-semibold transition-colors ${isDeveloperMode ? 'border-orange-600 bg-orange-500 text-white shadow-sm' : 'border-orange-500 bg-white text-orange-700 hover:bg-orange-50'}`}>
+            Developer mode
           </button>
         </div>
 
         {isDeveloperMode && (
-          <div className="rounded-md border border-dashed border-amber-300 bg-amber-50 p-3">
+          <div className="rounded-md border border-dashed border-orange-300 bg-orange-50 p-3">
             <p className="mb-2 text-sm font-semibold text-slate-800">Select calibration scenario</p>
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
               {[
@@ -56,7 +55,7 @@ const CalibrationSection: React.FC<CalibrationSectionProps> = ({ caseData, onUpd
                 ['source-workshop-completed', 'SOT: Not required / workshop challenges'],
                 ['source-not-required', 'SOT: Not required / workshop confirms']
               ].map(([value, label]) => (
-                <button key={value} type="button" onClick={() => applyDeveloperStatus(value)} className={`rounded-md border px-3 py-2 text-left text-sm font-semibold transition-colors ${developerStatus === value ? 'border-amber-500 bg-amber-500 text-gray-950 shadow-sm' : 'border-amber-300 bg-white text-amber-700 hover:bg-amber-100'}`}>
+                <button key={value} type="button" onClick={() => applyDeveloperStatus(value)} className={`rounded-md border px-3 py-2 text-left text-sm font-semibold transition-colors ${developerStatus === value ? 'border-orange-600 bg-orange-500 text-white shadow-sm' : 'border-orange-300 bg-white text-orange-700 hover:bg-orange-100'}`}>
                   {label}
                 </button>
               ))}
@@ -67,64 +66,64 @@ const CalibrationSection: React.FC<CalibrationSectionProps> = ({ caseData, onUpd
 
         {!sourceRequiresCalibration && (
           <div className="rounded-md border border-gray-200 bg-gray-50 p-4">
-            <p className="text-sm text-gray-700">Kalibrering er ikke registrert som nødvendig for denne saken.</p>
-            <div className="mt-3 flex items-start">
+            <p className="text-sm font-semibold text-slate-900">Calibration is marked as not required</p>
+            <p className="mt-1 text-sm text-gray-600">Based on the case information, calibration is not required.</p>
+            <label htmlFor="workshopRequiresCalibration" className="mt-4 flex cursor-pointer items-start rounded-md border border-gray-200 bg-white p-3 hover:border-gray-300">
               <input type="checkbox" id="workshopRequiresCalibration" checked={workshopRequiresCalibration} onChange={(e) => onUpdate({ calibration: { ...calibration, workshopRequiresCalibration: e.target.checked } })} className="mt-0.5 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-              <label htmlFor="workshopRequiresCalibration" className="ml-2 block text-sm text-gray-900">Kalibrering er likevel nødvendig</label>
-            </div>
+              <span className="ml-2 block text-sm font-medium text-gray-900">Mark calibration as required</span>
+            </label>
           </div>
         )}
 
         {sourceRequiresCalibration && (
           <div className="rounded-md border border-gray-200 bg-gray-50 p-4">
-            <p className="text-sm text-gray-700">Kalibrering er registrert som nødvendig for denne saken.</p>
-            <div className="mt-3 flex items-start">
+            <p className="text-sm font-semibold text-slate-900">Calibration is marked as required</p>
+            <p className="mt-1 text-sm text-gray-600">Based on the case information, calibration is required.</p>
+            <label htmlFor="workshopDisagrees" className="mt-4 flex cursor-pointer items-start rounded-md border border-gray-200 bg-white p-3 hover:border-gray-300">
               <input type="checkbox" id="workshopDisagrees" checked={workshopDisagrees} onChange={(e) => onUpdate({ calibration: { ...calibration, workshopDisagrees: e.target.checked } })} className="mt-0.5 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-              <label htmlFor="workshopDisagrees" className="ml-2 block text-sm text-gray-900">Kalibrering er ikke nødvendig</label>
-            </div>
+              <span className="ml-2 block text-sm font-medium text-gray-900">Mark calibration as not required</span>
+            </label>
           </div>
         )}
 
         {calibrationRequired && (
           <div className="rounded-md border border-gray-200 bg-white p-4">
-            <h4 className="text-base font-semibold text-slate-900">Kalibreringsdata</h4>
-            <p className="mt-1 text-sm text-gray-600">Legg ved dokumentasjon fra utført kalibrering og signer når arbeidet er ferdig.</p>
-            <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
-              <div>
-                <label htmlFor="calibrationSignature" className="mb-2 block text-sm font-medium text-gray-700">Signatur</label>
-                <input id="calibrationSignature" type="text" value={calibration?.signature || ''} onChange={(e) => onUpdate({ calibration: { ...calibration, signature: e.target.value } })} placeholder="Skriv fullt navn" className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm" />
-              </div>
-              <div>
-                <p className="mb-2 text-sm font-medium text-gray-700">Dokumentasjon</p>
-                <FileUploadSection fileTypeLabel="Kalibreringsdokumentasjon" allowedFileTypes=".pdf,.doc,.docx,image/*" onFileUpload={onFileUpload} existingFiles={existingCalibrationFiles} onDeleteFile={onDeleteFile} />
-              </div>
+            <h4 className="text-base font-semibold text-slate-900">Calibration details</h4>
+            <p className="mt-1 text-sm text-gray-600">Upload documentation from the completed calibration and sign when the work is finished.</p>
+            <div className="mt-4">
+              <p className="mb-1 text-sm font-medium text-gray-700">Documentation <span className="text-red-600">*</span></p>
+              <p className="mb-2 text-xs text-gray-500">Required to complete this section.</p>
+              <FileUploadSection fileTypeLabel="calibration documentation" allowedFileTypes=".pdf,.doc,.docx,image/*" onFileUpload={onFileUpload} existingFiles={existingCalibrationFiles} onDeleteFile={onDeleteFile} uploadPrompt="Drop the documentation here or click to browse" uploadHint="PDF, Word or image" />
             </div>
             <div className="mt-4">
-              <label htmlFor="calibrationComment" className="mb-2 block text-sm font-medium text-gray-700">Kommentar (valgfritt)</label>
-              <textarea id="calibrationComment" value={calibration?.comment || ''} onChange={(e) => onUpdate({ calibration: { ...calibration, comment: e.target.value } })} rows={3} placeholder="Legg til eventuell relevant informasjon" className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm" />
+              <label htmlFor="calibrationComment" className="mb-2 block text-sm font-medium text-gray-700">Comment (optional)</label>
+              <textarea id="calibrationComment" value={calibration?.comment || ''} onChange={(e) => onUpdate({ calibration: { ...calibration, comment: e.target.value } })} rows={3} placeholder="Add any relevant information" className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm" />
+            </div>
+            <div className="mt-4 border-t border-gray-200 pt-4">
+              <label htmlFor="calibrationSignature" className="mb-1 block text-sm font-medium text-gray-700">Signature <span className="text-red-600">*</span></label>
+              <p className="mb-2 text-xs text-gray-500">Sign when the calibration is complete and the documentation has been uploaded.</p>
+              <input id="calibrationSignature" type="text" value={calibration?.signature || ''} onChange={(e) => onUpdate({ calibration: { ...calibration, signature: e.target.value } })} placeholder="Enter full name" className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm lg:max-w-md" />
             </div>
           </div>
         )}
 
         {sourceRequiresCalibration && workshopDisagrees && (
           <div className="rounded-md border border-gray-200 bg-white p-4">
-            <h4 className="text-base font-semibold text-slate-900">Begrunnelse</h4>
-            <p className="mt-1 text-sm text-gray-600">Forklar hvorfor verkstedet vurderer at kalibrering ikke er nødvendig.</p>
+            <h4 className="text-base font-semibold text-slate-900">Calibration requirement change</h4>
+            <p className="mt-1 text-sm text-gray-600">Provide a reason for changing the calibration requirement.</p>
             <div className="mt-4">
-              <label htmlFor="calibrationChallengeComment" className="mb-2 block text-sm font-medium text-gray-700">Begrunnelse</label>
-              <textarea id="calibrationChallengeComment" value={calibration?.comment || ''} onChange={(e) => onUpdate({ calibration: { ...calibration, comment: e.target.value } })} rows={3} placeholder="Legg til begrunnelse" className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm" />
+              <label htmlFor="calibrationChallengeComment" className="mb-1 block text-sm font-medium text-gray-700">Reason <span className="text-red-600">*</span></label>
+              <p className="mb-2 text-xs text-gray-500">Required to complete this section.</p>
+              <textarea id="calibrationChallengeComment" value={calibration?.comment || ''} onChange={(e) => onUpdate({ calibration: { ...calibration, comment: e.target.value } })} rows={3} placeholder="Describe why calibration is not required" className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm" />
+            </div>
+            <div className="mt-4">
+              <p className="mb-1 text-sm font-medium text-gray-700">Supporting documentation (optional)</p>
+              <p className="mb-2 text-xs text-gray-500">Attach documentation that supports the change.</p>
+              <FileUploadSection fileTypeLabel="supporting documentation" allowedFileTypes=".pdf,.doc,.docx,image/*" onFileUpload={onFileUpload} existingFiles={existingCalibrationFiles} onDeleteFile={onDeleteFile} uploadPrompt="Drop supporting documentation here or click to browse" uploadHint="PDF, Word or image" />
             </div>
           </div>
         )}
 
-        {!calibrationRequired && !workshopDisagrees && (
-          <div className="rounded-md border border-green-200 bg-green-50 p-2">
-            <div className="flex items-center">
-              <Settings className="h-4 w-4 flex-shrink-0 text-green-400" />
-              <p className="ml-2 text-xs text-green-700">Ingen kalibreringsdata er nødvendig med mindre verkstedet vurderer at kalibrering må utføres.</p>
-            </div>
-          </div>
-        )}
       </div>
     </SectionWrapper>
   );
