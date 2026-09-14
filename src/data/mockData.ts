@@ -1150,9 +1150,10 @@ export const hasCalibrationComplete = (caseItem: WorkshopCase | null | undefined
 
   if (!calibrationRequired) return true;
 
+  const hasConfirmation = calibration.confirmed === true;
   const hasSignature = calibration.signature && calibration.signature.trim() !== '';
   const hasFiles = calibration.files && calibration.files.length > 0;
-  return !!hasSignature && !!hasFiles;
+  return hasConfirmation && !!hasSignature && !!hasFiles;
 };
 
 export const getInsuranceCoverageStatus = (caseItem: WorkshopCase | null | undefined): 'approved' | 'not_approved' | 'undefined' | 'not_fetched' => {

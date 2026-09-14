@@ -21,7 +21,11 @@ const CalibrationSection: React.FC<CalibrationSectionProps> = ({ caseData, onUpd
   const calibrationRequired = sourceRequiresCalibration ? !workshopDisagrees : workshopRequiresCalibration;
   const isComplete = sourceRequiresCalibration && workshopDisagrees
     ? !!calibration?.comment?.trim()
-    : !calibrationRequired || (!!calibration?.signature?.trim() && !!calibration.files?.length);
+    : !calibrationRequired || (
+      calibration?.confirmed === true &&
+      !!calibration.signature?.trim() &&
+      !!calibration.files?.length
+    );
   const existingCalibrationFiles = (calibration?.files || []).map(file => ({ id: file.id, name: file.name, url: file.url, type: file.type }));
 
   const applyDeveloperStatus = (status: string) => {
@@ -100,6 +104,15 @@ const CalibrationSection: React.FC<CalibrationSectionProps> = ({ caseData, onUpd
               <textarea id="calibrationComment" value={calibration?.comment || ''} onChange={(e) => onUpdate({ calibration: { ...calibration, comment: e.target.value } })} rows={3} placeholder="Add any relevant information" className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm" />
             </div>
             <div className="mt-4 border-t border-gray-200 pt-4">
+              <p className="mb-2 text-sm font-medium text-gray-700">Confirmation <span className="text-red-600">*</span></p>
+              <label htmlFor="calibrationConfirmation" className="flex cursor-pointer items-start rounded-md border border-gray-200 bg-gray-50 p-3 hover:border-gray-300">
+                <input id="calibrationConfirmation" type="checkbox" checked={calibration?.confirmed || false} onChange={(e) => onUpdate({ calibration: { ...calibration, confirmed: e.target.checked } })} className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                <span className="ml-2 block text-sm text-gray-900">
+                  I confirm that the workshop has carried out the necessary work according to the car manufacturer's requirements and instructions. The workshop has the necessary expertise, tools and equipment to carry this out.
+                </span>
+              </label>
+            </div>
+            <div className="mt-4">
               <label htmlFor="calibrationSignature" className="mb-1 block text-sm font-medium text-gray-700">Signature <span className="text-red-600">*</span></label>
               <p className="mb-2 text-xs text-gray-500">Sign when the calibration is complete and the documentation has been uploaded.</p>
               <input id="calibrationSignature" type="text" value={calibration?.signature || ''} onChange={(e) => onUpdate({ calibration: { ...calibration, signature: e.target.value } })} placeholder="Enter full name" className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm lg:max-w-md" />
