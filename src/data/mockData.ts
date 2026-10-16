@@ -1,6 +1,7 @@
 // Mock Data for Workshop Management System
 
 import { comprehensiveMockCases } from './comprehensiveMockCases';
+import { getCalibrationState } from '../utils/calibration';
 
 // Base interface for common properties
 interface BaseItem {
@@ -118,9 +119,13 @@ export interface ActionLogEntry {
   metadata?: Record<string, any>;
 }
 
+export type CalibrationRequirement = 'yes' | 'possible' | 'no';
+export type CalibrationSourceValue = boolean | CalibrationRequirement | Capitalize<CalibrationRequirement>;
+
 export interface Calibration {
-  pidRequiresCalibration?: boolean;
-  arRequiresCalibration?: boolean;
+  pidRequiresCalibration?: CalibrationSourceValue;
+  arRequiresCalibration?: CalibrationSourceValue;
+  workshopAssessment?: 'required' | 'not_required';
   calibrationType?: 'dynamic' | 'static';
   required?: boolean;
   notNeeded?: boolean;
@@ -1134,26 +1139,7 @@ export const hasPartsAndLaborComplete = (caseItem: WorkshopCase | null | undefin
 };
 
 export const hasCalibrationComplete = (caseItem: WorkshopCase | null | undefined): boolean => {
-  if (!caseItem) return false;
-
-  const calibration = caseItem.calibration;
-  if (!calibration) return false;
-
-  const sourceRequiresCalibration = calibration.pidRequiresCalibration === true || calibration.arRequiresCalibration === true;
-  const workshopRequiresCalibration = calibration.workshopRequiresCalibration === true;
-  const workshopDisagrees = calibration.workshopDisagrees === true;
-  const calibrationRequired = sourceRequiresCalibration ? !workshopDisagrees : workshopRequiresCalibration;
-
-  if (sourceRequiresCalibration && workshopDisagrees) {
-    return !!calibration.comment?.trim();
-  }
-
-  if (!calibrationRequired) return true;
-
-  const hasConfirmation = calibration.confirmed === true;
-  const hasSignature = calibration.signature && calibration.signature.trim() !== '';
-  const hasFiles = calibration.files && calibration.files.length > 0;
-  return hasConfirmation && !!hasSignature && !!hasFiles;
+  return getCalibrationState(caseItem?.calibration).isComplete;
 };
 
 export const getInsuranceCoverageStatus = (caseItem: WorkshopCase | null | undefined): 'approved' | 'not_approved' | 'undefined' | 'not_fetched' => {
@@ -1230,6 +1216,7 @@ export const getPartsLaborApprovalStatus = (caseItem: WorkshopCase | null | unde
 
 export const getCalibrationApprovalStatus = (caseItem: WorkshopCase | null | undefined): SectionApprovalStatus => {
   if (!caseItem) return 'incomplete';
+  if (getCalibrationState(caseItem.calibration).needsAssessment) return 'incomplete';
   if (caseItem.calibrationApprovalStatus === 'approved') return 'approved';
 
   return hasCalibrationComplete(caseItem) ? 'ready_for_approval' : 'incomplete';
@@ -1332,7 +1319,9 @@ export const getMissingRequirementsForCompletion = (caseItem: WorkshopCase | nul
   }
   
   if (!hasCalibrationComplete(caseItem)) {
-    missing.push('Calibration must be completed or marked as not needed');
+    missing.push(getCalibrationState(caseItem.calibration).needsAssessment
+      ? 'Inspect the vehicle and confirm whether calibration is required'
+      : 'Calibration must be completed or marked as not needed');
   }
   
   if (!caseItem.service.repairFinishedDate) {
