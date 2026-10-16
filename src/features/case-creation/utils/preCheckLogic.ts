@@ -1,4 +1,5 @@
 import { CaseData } from '../types/case';
+import { isCalibrationComplete } from './calibration';
 
 const calculateItemTotal = (item: any) => {
   const subtotal = item.quantity * item.unitPrice;
@@ -134,8 +135,8 @@ export const determineCaseApprovalStatus = (caseData: CaseData): 'auto_approved'
   const preCheckSummary = getPreCheckSummary(caseData);
   const allChecksPassed = preCheckSummary.every(check => check.status === 'success');
   
-  // If customer is paying without coverage, requires manual review
-  if (caseData.customerAcceptedNoCoverage) {
+  // Missing coverage or incomplete calibration requires manual review.
+  if (caseData.customerAcceptedNoCoverage || !isCalibrationComplete(caseData.calibration)) {
     return 'manual_review';
   }
   

@@ -15,7 +15,10 @@ export const getCalibrationRequirement = (calibration: Calibration | undefined):
   return sources.includes('possible') ? 'possible' : 'no';
 };
 
-export const getCalibrationState = (calibration: Calibration | undefined) => {
+export const getCalibrationState = (
+  calibration: Calibration | undefined,
+  hasDocumentation = !!calibration?.files?.length
+) => {
   const sourceRequirement = getCalibrationRequirement(calibration);
   const isPossible = sourceRequirement === 'possible';
   const needsAssessment = isPossible && !calibration?.workshopAssessment;
@@ -32,7 +35,7 @@ export const getCalibrationState = (calibration: Calibration | undefined) => {
       : !requiresCalibration || (
         calibration.confirmed === true &&
         !!calibration.signature?.trim() &&
-        !!calibration.files?.length
+        hasDocumentation
       )
   );
 

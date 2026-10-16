@@ -103,7 +103,7 @@ const colors = {
 export default {
   content: {
     relative: true,
-    files: ['./**/*.{ts,tsx}'],
+    files: ['./**/*.{ts,tsx}', '../../components/common/CalibrationAssessment.tsx'],
   },
   important: '.case-creation',
   corePlugins: {

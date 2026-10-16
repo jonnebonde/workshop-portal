@@ -5,7 +5,7 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import { CalibrationData, RepairItem, RepairCategory } from '../../types/case';
-import { isCalibrationComplete } from '../../utils/calibration';
+import { getCreationCalibrationState, isCalibrationComplete } from '../../utils/calibration';
 import CalibrationSection from '../CalibrationSection';
 
 // Suggested repair items based on glass type
@@ -597,7 +597,9 @@ const PartsLaborStep: React.FC<PartsLaborStepProps> = ({
                   <li key={index}>{issue}</li>
                 ))}
                 {!isCalibrationComplete(initialCalibration) && (
-                  <li>Complete the required calibration information or save the case as a draft</li>
+                  <li>{getCreationCalibrationState(initialCalibration).needsAssessment
+                    ? 'Inspect the vehicle and choose whether calibration is required, or save the case as a draft'
+                    : 'Complete the required calibration information or save the case as a draft'}</li>
                 )}
               </ul>
             </div>

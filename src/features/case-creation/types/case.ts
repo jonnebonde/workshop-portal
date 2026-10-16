@@ -1,3 +1,5 @@
+import type { Calibration, CalibrationSourceValue } from '../../../data/mockData';
+
 export interface Vehicle {
   vrn: string;
   make: string;
@@ -105,8 +107,9 @@ export interface PriceAgreementResult {
 }
 
 export interface CalibrationData {
-  pidRequiresCalibration: boolean;
-  arRequiresCalibration: boolean;
+  pidRequiresCalibration: CalibrationSourceValue;
+  arRequiresCalibration: CalibrationSourceValue;
+  workshopAssessment?: Calibration['workshopAssessment'];
   workshopRequiresCalibration: boolean;
   workshopDisagrees: boolean;
   comment: string;

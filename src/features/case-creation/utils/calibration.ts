@@ -1,16 +1,9 @@
-import { CalibrationData } from '../types/case';
+import type { CalibrationData } from '../types/case';
+import { getCalibrationState } from '../../../utils/calibration';
+
+export const getCreationCalibrationState = (calibration: CalibrationData) =>
+  getCalibrationState(calibration, !!calibration.document);
 
 export const isCalibrationComplete = (calibration: CalibrationData): boolean => {
-  const sourceRequiresCalibration = calibration.pidRequiresCalibration || calibration.arRequiresCalibration;
-  const calibrationRequired = sourceRequiresCalibration
-    ? !calibration.workshopDisagrees
-    : calibration.workshopRequiresCalibration;
-
-  if (sourceRequiresCalibration && calibration.workshopDisagrees) {
-    return calibration.comment.trim().length > 0;
-  }
-
-  if (!calibrationRequired) return true;
-
-  return calibration.confirmed && calibration.signature.trim().length > 0 && calibration.document !== null;
+  return getCreationCalibrationState(calibration).isComplete;
 };

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FileText, Upload, X } from 'lucide-react';
 import { CalibrationData } from '../types/case';
+import CalibrationAssessment from '../../../components/common/CalibrationAssessment';
+import { getCreationCalibrationState } from '../utils/calibration';
 
 interface CalibrationSectionProps {
   calibration: CalibrationData;
@@ -11,18 +13,18 @@ const CalibrationSection: React.FC<CalibrationSectionProps> = ({ calibration, on
   const [isDeveloperMode, setIsDeveloperMode] = useState(false);
   const [fileError, setFileError] = useState('');
 
-  const sourceRequiresCalibration = calibration.pidRequiresCalibration || calibration.arRequiresCalibration;
-  const calibrationRequired = sourceRequiresCalibration
-    ? !calibration.workshopDisagrees
-    : calibration.workshopRequiresCalibration;
+  const { sourceRequirement, requiresCalibration, needsOverrideReason } = getCreationCalibrationState(calibration);
+  const sourceRequiresCalibration = sourceRequirement === 'yes';
 
-  const developerStatus = calibration.workshopDisagrees
-    ? 'source-required-challenged'
-    : calibration.workshopRequiresCalibration
-      ? 'source-not-required-challenged'
-      : sourceRequiresCalibration
-        ? 'source-required-confirmed'
-        : 'source-not-required-confirmed';
+  const developerStatus = sourceRequirement === 'possible'
+    ? 'source-possible'
+    : calibration.workshopDisagrees
+      ? 'source-required-challenged'
+      : calibration.workshopRequiresCalibration
+        ? 'source-not-required-challenged'
+        : sourceRequiresCalibration
+          ? 'source-required-confirmed'
+          : 'source-not-required-confirmed';
 
   const applyDeveloperStatus = (status: string) => {
     const scenarios: Record<string, Partial<CalibrationData>> = {
@@ -49,10 +51,22 @@ const CalibrationSection: React.FC<CalibrationSectionProps> = ({ calibration, on
         arRequiresCalibration: false,
         workshopDisagrees: false,
         workshopRequiresCalibration: false
+      },
+      'source-possible': {
+        pidRequiresCalibration: 'Possible',
+        arRequiresCalibration: false,
+        workshopDisagrees: false,
+        workshopRequiresCalibration: false
       }
     };
 
-    onChange(scenarios[status]);
+    setFileError('');
+    onChange({ ...scenarios[status], workshopAssessment: undefined, confirmed: false, signature: '' });
+  };
+
+  const handleAssessment = (assessment: 'required' | 'not_required') => {
+    setFileError('');
+    onChange({ workshopAssessment: assessment, confirmed: false, signature: '' });
   };
 
   const handleDocumentUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -133,15 +147,25 @@ const CalibrationSection: React.FC<CalibrationSectionProps> = ({ calibration, on
 
       {isDeveloperMode && (
         <div className="mb-4 rounded-md border border-dashed border-yellow-500 bg-yellow-50 p-3">
-          <p className="mb-2 text-sm font-semibold text-gray-900">Select calibration scenario</p>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
+          <p className="mb-2 text-sm font-semibold text-gray-900">API response</p>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
             {[
-              ['source-required-confirmed', 'SOT: Required / workshop confirms'],
-              ['source-required-challenged', 'SOT: Required / workshop challenges'],
-              ['source-not-required-challenged', 'SOT: Not required / workshop challenges'],
-              ['source-not-required-confirmed', 'SOT: Not required / workshop confirms']
+              ['source-required-confirmed', 'Yes — Calibration required'],
+              ['source-possible', 'Possible — Inspect vehicle'],
+              ['source-not-required-confirmed', 'No — Calibration not required']
             ].map(([value, label]) => (
-              <button key={value} type="button" onClick={() => applyDeveloperStatus(value)} className={`rounded-md border px-3 py-2 text-left text-sm font-semibold transition-colors ${developerStatus === value ? 'border-yellow-500 bg-yellow-500 text-white shadow-sm' : 'border-yellow-500 bg-white text-yellow-800 hover:bg-yellow-50'}`}>
+              <button key={value} type="button" aria-pressed={developerStatus === value} onClick={() => applyDeveloperStatus(value)} className={`rounded-md border px-3 py-2 text-left text-sm font-semibold transition-colors ${developerStatus === value ? 'border-yellow-500 bg-yellow-500 text-white shadow-sm' : 'border-yellow-500 bg-white text-yellow-800 hover:bg-yellow-50'}`}>
+                {label}
+              </button>
+            ))}
+          </div>
+          <p className="mb-2 mt-4 text-sm font-semibold text-gray-900">Workshop overrides</p>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            {[
+              ['source-required-challenged', 'Yes / workshop marks not required'],
+              ['source-not-required-challenged', 'No / workshop marks required']
+            ].map(([value, label]) => (
+              <button key={value} type="button" aria-pressed={developerStatus === value} onClick={() => applyDeveloperStatus(value)} className={`rounded-md border px-3 py-2 text-left text-sm font-semibold transition-colors ${developerStatus === value ? 'border-yellow-500 bg-yellow-500 text-white shadow-sm' : 'border-yellow-500 bg-white text-yellow-800 hover:bg-yellow-50'}`}>
                 {label}
               </button>
             ))}
@@ -151,6 +175,11 @@ const CalibrationSection: React.FC<CalibrationSectionProps> = ({ calibration, on
       )}
 
       <div className="space-y-4">
+        {sourceRequirement === 'possible' && (
+          <CalibrationAssessment assessment={calibration.workshopAssessment} onAssessment={handleAssessment} />
+        )}
+
+        {sourceRequirement !== 'possible' && (
         <div className="rounded-md border border-gray-200 bg-gray-50 p-4">
           <p className="text-sm font-semibold text-gray-900">
             Calibration is marked as {sourceRequiresCalibration ? 'required' : 'not required'}
@@ -171,8 +200,9 @@ const CalibrationSection: React.FC<CalibrationSectionProps> = ({ calibration, on
             </label>
           )}
         </div>
+        )}
 
-        {calibrationRequired && (
+        {requiresCalibration && (
           <div className="rounded-md border border-gray-200 bg-white p-4">
             <h4 className="text-base font-semibold text-gray-900">Calibration details</h4>
             <p className="mt-1 text-sm text-gray-600">Upload documentation from the completed calibration and sign when the work is finished.</p>
@@ -200,7 +230,7 @@ const CalibrationSection: React.FC<CalibrationSectionProps> = ({ calibration, on
           </div>
         )}
 
-        {sourceRequiresCalibration && calibration.workshopDisagrees && (
+        {needsOverrideReason && (
           <div className="rounded-md border border-gray-200 bg-white p-4">
             <h4 className="text-base font-semibold text-gray-900">Calibration requirement change</h4>
             <p className="mt-1 text-sm text-gray-600">Provide a reason for changing the calibration requirement.</p>
