@@ -1,0 +1,24 @@
+@config "./tailwind.config.js";
+
+@tailwind utilities;
+
+/* Preserve the standalone form styling without changing other portal pages. */
+.case-creation {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.case-creation main {
+  font-family: inherit;
+}
+
+.case-creation input,
+.case-creation textarea,
+.case-creation select {
+  background-color: #ffffff !important;
+}
+
+.case-creation input:focus,
+.case-creation textarea:focus,
+.case-creation select:focus {
+  box-shadow: none;
+}
