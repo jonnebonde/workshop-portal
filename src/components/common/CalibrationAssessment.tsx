@@ -13,8 +13,7 @@ const CalibrationAssessment = ({ assessment, onAssessment }: CalibrationAssessme
     </p>
 
     <fieldset className="mt-5" aria-describedby="calibration-inspection-guidance">
-      <legend className="text-sm font-semibold text-gray-900">What did the vehicle inspection show?</legend>
-      <p className="mt-1 text-sm text-gray-700">Select the result once you have checked the vehicle.</p>
+      
       <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
         {[
           { value: 'required' as const, title: 'Calibration is required', description: 'Complete the calibration, then upload documentation and sign.' },
