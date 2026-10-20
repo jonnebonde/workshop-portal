@@ -11,7 +11,7 @@ A comprehensive workshop management system built for glass repair and replacemen
 - **Image management** with upload requirements and validation
 - **Parts & Labor** tracking with automatic calculations
 - **Invoice management** with OCR processing and review workflow
-- **Calibration tracking** with digital signatures
+- **Calibration tracking** with Yes, Possible and No requirements, workshop assessment, documentation and signatures
 
 ### Dashboard & Analytics
 - **Real-time KPI monitoring** across different case stages
@@ -103,7 +103,7 @@ src/
 - **Image Section**: Photo upload and management
 - **Parts & Labor**: Cost calculation and tracking
 - **Invoice Section**: Invoice processing and review
-- **Calibration**: Equipment calibration tracking
+- **Calibration**: Vehicle calibration requirements and workshop assessment in Case Details and Create new case. See the [calibration workflow](docs/calibration-ux-ui.md).
 - **Communication**: Chat and messaging system
 
 ## 🔧 Configuration
