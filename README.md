@@ -1,5 +1,9 @@
 # Lumera Workshop Management System
 
+## Dokumentasjon og tekstredigering
+
+Start med [sideoversikten](docs/portal-pages.md) for sidenotater og tekstark, eller [veiledningen for tekstendringer](docs/editing-copy.md). Codex følger [AGENTS.md](AGENTS.md) og [arbeids.md](arbeids.md). Dokumentasjonen beskriver undersøkt kode og skiller demonstrasjoner fra verifiserte integrasjoner.
+
 A comprehensive workshop management system built for glass repair and replacement services. This application provides a complete solution for managing insurance claims, tracking repair progress, and handling customer communications.
 
 ## 🚀 Features
