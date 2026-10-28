@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Separat, privat produktminne skal ikke publiseres med portalen
+.product-memory/
