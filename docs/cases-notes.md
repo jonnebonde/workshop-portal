@@ -20,6 +20,8 @@ Dashboard henter lokale mockdata. Sideoverskriften er Cases, mens navigasjonen f
 
 ## Åpne spørsmål og TODO
 
+- [ ] Brukerønske 2026-10-28: Fjern progress-/seksjonsikonene fra sakslisten, både i desktop-tabellen og mobilkortene. Begrunnelse: «Åpen» skal formidle at det er Workshop Portal-brukerens tur til å arbeide med saken. Detaljert seksjonsstatus og tilbakemeldinger skal forklares i [headeren på saksdetaljsiden](case-details-notes.md). Dette er ønsket retning, ikke verifisert nåværende statuslogikk.
+- [ ] Vurder behov for sortering, filtrering eller gruppering av saker per verksted for kjedebrukere. Selve visningsformen er uavklart; se [støtte for kjedebrukere og verkstedvalg](create-case-notes.md).
 - [ ] Avklar ønsket standardfane, søkefelt og konsistent navigasjonstekst.
 - [ ] Gjennomgå og velg ønskede tekstforslag i tekstarket før implementering.
 - [ ] Kontroller berørte tilstander i nettleseren når UI endres.

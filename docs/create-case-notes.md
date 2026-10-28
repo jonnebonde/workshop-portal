@@ -19,6 +19,7 @@ Lagring simuleres med timeout og console.log. NewCasePage setter ikke onCaseSubm
 
 ## Åpne spørsmål og TODO
 
+- [ ] Brukerønske 2026-10-28: Støtt flere brukere og særlig kjedebrukere som kan opprette saker på vegne av verksteder i egen kjede. Disse brukerne må kunne velge hvilket verksted saken opprettes for. Avklar bruker-/rollemodell, hvilke verksteder hver bruker kan representere, og hvordan valgt verksted følger saken. Dette beskriver ønsket funksjon, ikke eksisterende tilgangsstyring. Behovet for verkstedbasert sortering/filtrering vurderes i [saksoversikten](cases-notes.md).
 - [ ] Test alle avslutninger og tilstander; avklar koblingen til saksliste og backend før leveransestatus endres.
 - [ ] Gjennomgå og velg ønskede tekstforslag i tekstarket før implementering.
 - [ ] Kontroller berørte tilstander i nettleseren når UI endres.

@@ -16,6 +16,7 @@ Lokale scenarioer og dokumentbehandling bekrefter ikke reell DDF-tilgang eller l
 
 ## Åpne spørsmål og TODO
 
+- [ ] Brukerønske 2026-10-28: Legg til en av/på-bryter i utviklermodus for «Send SMS for DDF» i opprettelsesflyten. Bryteren skal gjøre det mulig å demonstrere og teste flyten med og uten SMS-valget. Tidspunkt for faktisk levering og tilgjengelighet i de enkelte markedene er uavklart; avklar standardverdi, alternativ flyt når valget er av, og eventuell senere markedsstyring. En lokal utviklerbryter bekrefter ikke reell SMS-integrasjon eller produksjonsstyrt tilgjengelighet.
 - [ ] Avklar tillatte valg, samtykke/tilgang, reserveflyt og når brukeren kan fortsette.
 - [ ] Gjennomgå og velg ønskede tekstforslag i tekstarket før implementering.
 - [ ] Kontroller berørte tilstander i nettleseren når UI endres.

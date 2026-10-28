@@ -20,6 +20,7 @@ useCaseData leser og oppdaterer mockData. Fakturabehandling og dokumentmetadata 
 
 ## Åpne spørsmål og TODO
 
+- [ ] Brukerønske 2026-10-28: La headeren på saksdetaljsiden forklare status og tilbakemeldinger på saksdata og seksjoner mer detaljert. Avklar hvilke tilstander, tilbakemeldinger og neste handlinger som skal vises, i sammenheng med [fjerning av progressikoner fra sakslisten](cases-notes.md).
 - [ ] Verifiser statusoverganger, avbrudd, manglende sak og sammenhengen mellom opprettelse og saksdetaljer.
 - [ ] Gjennomgå og velg ønskede tekstforslag i tekstarket før implementering.
 - [ ] Kontroller berørte tilstander i nettleseren når UI endres.
