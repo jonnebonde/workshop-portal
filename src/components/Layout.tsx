@@ -184,6 +184,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               )}
             </NavLink>
 
+            {user && <NavLink
+              to="/price-agreement"
+              onClick={() => setIsSidebarOpen(false)}
+              className={({ isActive }) =>
+                `flex items-center px-3 py-2.5 text-sm rounded-lg transition-all duration-200 ${isActive
+                  ? 'bg-blue-700 text-white shadow-sm'
+                  : 'text-blue-100 hover:bg-blue-700 hover:text-white hover:shadow-sm'}`
+              }
+            >Agreements</NavLink>}
+
             <NavLink 
               to="/send-ddf-sms" 
               className={({ isActive }) => 
@@ -201,7 +211,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </aside>
       
       {/* Main content */}
-      <div className="flex flex-col flex-1 bg-brand-dark mt-16">
+      <div className="flex min-w-0 flex-col flex-1 bg-brand-dark mt-16">
 
         {/* Scrollable content area */}
         <div className="flex-1 overflow-y-auto bg-gray-50 min-w-0 rounded-tl-md lg:ml-48">

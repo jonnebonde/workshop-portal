@@ -5,6 +5,8 @@ Dokumentgren: `docs/workshop-agreements-task`, fra WP `main@c6748b89cfecff6d9bf7
 
 ## Mål og bestilling
 
+**Oppdatert arbeidsgren 2026-10-29:** Brukeren har uttrykkelig bedt om implementering i denne grenen, `docs/workshop-agreements-task`. Dette erstatter det tidligere kravet om en separat kodegren nedenfor. Lokal demostatus og kontrollbegrensninger er dokumentert i [avtalenotatene](agreements-notes.md); akseptansekriteriene nedenfor er ikke en påstand om ferdig integrasjon.
+
 Bygg Agreements i WP med konsistent design og utførelse basert på eksisterende Agreements i Partner Portal (PP) og Agent Portal (AP), tilpasset verkstedets behov.
 
 **Eksplisitte krav fra Jonne i denne samtalen:**
@@ -50,7 +52,7 @@ Bruk eksplisitte avtaletilordninger. Manglende avtale eller oppslagsfeil skal ik
 | Prisgrunnlag | Valuta, avgift, tom pris, rabatt, enheter og fakturerbarhet må følge datakontrakten. |
 | Datoregler | Skill versjonsvisning fra faktisk prisvalg på en sak. Siden skal ikke innføre en ny prisberegningsregel. |
 | API | Endepunkt, responsskjema, serverautorisasjon, feiltilstander og datakilder. |
-| Eksport | Behov og rettigheter for nedlasting/eksport er ikke avklart i bestillingen. |
+| Eksport | Brukeren bestilte eksport 2026-10-29 med tydelig angivelse av prisversjon og deretter valg av format, særlig Excel. Lokal Excel- og CSV-eksport av valgt publisert versjon er lagt til, med Excel som standard; integrerte eksportrettigheter gjenstår. Se [avtalenotatene](agreements-notes.md). |
 
 ## Akseptansekriterier
 
@@ -95,4 +97,4 @@ Utkastet er mulig gjenbruk, ikke ferdig/godkjent leveranse. Det inneholder synte
 
 Ved videre arbeid: hent og gjennomgå committen før eventuell gjenbruk, kontroller dagens main/arbeidsgren, bevar samtidige endringer, avklar punktene ovenfor og gjennomfør akseptansekriteriene. Ikke overfør utkastets fiktive priser, tilordninger eller valg om fremtidige versjoner til vedtatte produktregler.
 
-Denne dokumentgrenen endrer ingen applikasjonskode, produktstatus eller eksternt produktminne.
+Ved opprettelsen endret dokumentgrenen ingen applikasjonskode, produktstatus eller eksternt produktminne. Etter brukerens beskjed 2026-10-29 inneholder arbeidskopien også avtaledemoen; se [implementert omfang og kontroller](agreements-notes.md). Dette er ingen produksjonsbekreftelse.

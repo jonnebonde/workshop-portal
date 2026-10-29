@@ -4,7 +4,7 @@ Opprettet 2026-10-28 på `docs/portal-notes-and-copy`, fra `main@b6f6829baee6b1f
 
 ## Sider og delområder
 
-Seks aktive sider: /, /new-case, /cases/:id, /news, /send-ddf-sms og /settings. Delområder under opprettelse og saksdetaljer er egne tekstark for enklere redigering.
+Sju aktive sider: /, /new-case, /cases/:id, /news, /send-ddf-sms, /settings og /price-agreement. Avtalesiden er lagt til 2026-10-29 som lokal demo; opprinnelig kartlegging nedenfor er fra 2026-10-28. Delområder under opprettelse og saksdetaljer er egne tekstark for enklere redigering.
 
 | Område | Inngang | Dokumentasjon | Tekstark | Tekst-ID-er |
 | --- | --- | --- | --- | --- |
@@ -26,6 +26,7 @@ Seks aktive sider: /, /new-case, /cases/:id, /news, /send-ddf-sms og /settings. 
 | Nyheter | /news | [Notater](news-notes.md) | [Tekster](news-copy.md) | 13 |
 | Sende DDF-SMS | /send-ddf-sms | [Notater](send-ddf-sms-notes.md) | [Tekster](send-ddf-sms-copy.md) | 12 |
 | Innstillinger | /settings | [Notater](settings-notes.md) | [Tekster](settings-copy.md) | 26 |
+| Agreements (lokal demo) | /price-agreement | [Notater](agreements-notes.md) | [Tekster](agreements-copy.md) | 48 |
 | Navigasjon og støtte | Felles skall | [Notater](navigation-notes.md) | [Tekster](navigation-copy.md) | 21 |
 | Felles status og opplasting | Delte komponenter | [Notater](shared-notes.md) | [Tekster](shared-copy.md) | 4 |
 

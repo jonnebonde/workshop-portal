@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
+import AgreementsPage from './pages/AgreementsPage';
 import CaseDetail from './pages/CaseDetail';
 import NewsPage from './pages/NewsPage';
 import SettingsPage from './pages/SettingsPage';
@@ -15,6 +16,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
+          <Route path="/price-agreement" element={<Layout><AgreementsPage /></Layout>} />
           <Route path="/" element={
             <Layout>
               <Dashboard />
