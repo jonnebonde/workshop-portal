@@ -18,8 +18,8 @@ Fyll inn **Forslag**, behold ID og plassholdere. Tom celle betyr ingen endring. 
 | WP-DET-010 | title; [CaseDetail.tsx:532](../src/pages/CaseDetail.tsx#L532) | Delete Case | |
 | WP-DET-011 | Synlig tekst; [CaseDetail.tsx:535](../src/pages/CaseDetail.tsx#L535) | Delete Case | |
 | WP-DET-012 | Synlig tekst; [CaseDetailHeader.tsx:60](../src/components/CaseDetailHeader.tsx#L60) | Back | |
-| WP-DET-013 | Synlig tekst; [CaseDetailHeader.tsx:66](../src/components/CaseDetailHeader.tsx#L66) | Case number: | |
-| WP-DET-014 | Synlig tekst; [CaseDetailHeader.tsx:76](../src/components/CaseDetailHeader.tsx#L76) | VRN: | |
+| WP-DET-013 | Saksnummer i informasjonsfelt under hovedtittel; flyttet 2026-11-02; [CaseDetailHeader.tsx](../src/components/CaseDetailHeader.tsx) | Case number: | |
+| WP-DET-014 | Hovedtittel; flyttet 2026-11-02; [CaseDetailHeader.tsx](../src/components/CaseDetailHeader.tsx) | VRN: | |
 | WP-DET-015 | title; [CaseDetailHeader.tsx:86](../src/components/CaseDetailHeader.tsx#L86) | Submit Case | |
 | WP-DET-016 | Synlig tekst; [CaseDetailHeader.tsx:89](../src/components/CaseDetailHeader.tsx#L89) | Submit Case | |
 | WP-DET-017 | Synlig tekst; [CaseInfoSection.tsx:34](../src/components/CaseInfoSection.tsx#L34) | Customer | |

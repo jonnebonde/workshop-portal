@@ -1,5 +1,6 @@
 import React from 'react';
-import { CheckCircle, AlertCircle, Circle, AlertTriangle } from 'lucide-react';
+import { CheckCircle, Circle, AlertTriangle } from 'lucide-react';
+import { splitCaseCommunication, hasUnreadEntries } from '../utils/caseCommunication';
 import { WorkshopCase } from '../data/mockData';
 import {
   hasInsuranceCoverageComplete,
@@ -7,9 +8,7 @@ import {
   hasImagesAvailable,
   hasPartsAndLaborComplete,
   hasCalibrationComplete,
-  hasInvoicePresent,
-  hasActionLogActivity,
-  hasNewLogMessages
+  hasInvoicePresent
 } from '../data/mockData';
 
 interface ProgressTrackerProps {
@@ -26,6 +25,7 @@ interface SectionStatus {
 
 const ProgressTracker: React.FC<ProgressTrackerProps> = ({ caseData }) => {
   if (!caseData) return null;
+  const { comments, activity } = splitCaseCommunication(caseData.actionLog);
 
   const sections: SectionStatus[] = [
     { name: 'Case Info', isComplete: true, isRequired: true, sectionId: 'case-info' },
@@ -35,13 +35,9 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = ({ caseData }) => {
     { name: 'Parts & Labor', isComplete: hasPartsAndLaborComplete(caseData), isRequired: true, sectionId: 'parts-labor' },
     { name: 'Calibration', isComplete: hasCalibrationComplete(caseData), isRequired: true, sectionId: 'calibration' },
     { name: 'Invoice', isComplete: hasInvoicePresent(caseData) && !!caseData?.invoice?.kid && !!caseData?.invoice?.totalAmount, isRequired: true, sectionId: 'invoice' },
-    { name: 'Log', isComplete: false, isRequired: false, sectionId: 'communication-log', hasNewMessages: hasNewLogMessages(caseData) },
+    { name: 'Comments', isComplete: false, isRequired: false, sectionId: 'comments', hasNewMessages: hasUnreadEntries(comments, caseData.lastCommentsViewedAt) },
+    { name: 'Activity log', isComplete: false, isRequired: false, sectionId: 'communication-log', hasNewMessages: hasUnreadEntries(activity, caseData.lastLogViewedAt) },
   ];
-
-  const requiredSections = sections.filter(s => s.isRequired);
-  const completedRequired = requiredSections.filter(s => s.isComplete).length;
-  const totalRequired = requiredSections.length;
-  const progressPercentage = Math.round((completedRequired / totalRequired) * 100);
 
   const scrollToSection = (sectionId: string) => {
     console.log(`[ProgressTracker] Section button clicked:`, sectionId);
@@ -98,7 +94,7 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = ({ caseData }) => {
 
       <div className="flex flex-wrap gap-2">
         {sections.map((section, index) => {
-          const isLogSection = section.sectionId === 'communication-log';
+          const isLogSection = section.sectionId === 'communication-log' || section.sectionId === 'comments';
           const hasNewItems = section.hasNewMessages;
 
           return (

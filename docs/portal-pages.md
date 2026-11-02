@@ -4,7 +4,7 @@ Opprettet 2026-10-28 på `docs/portal-notes-and-copy`, fra `main@b6f6829baee6b1f
 
 ## Sider og delområder
 
-Seks aktive sider: /, /new-case, /cases/:id, /news, /send-ddf-sms og /settings. Delområder under opprettelse og saksdetaljer er egne tekstark for enklere redigering.
+Sju aktive sider: /, /new-case, /cases/:id, /news, /send-ddf-sms, /settings og /price-agreement. Avtalesiden er lagt til 2026-10-29 som lokal demo; opprinnelig kartlegging nedenfor er fra 2026-10-28. Delområder under opprettelse og saksdetaljer er egne tekstark for enklere redigering.
 
 | Område | Inngang | Dokumentasjon | Tekstark | Tekst-ID-er |
 | --- | --- | --- | --- | --- |
@@ -13,10 +13,10 @@ Seks aktive sider: /, /new-case, /cases/:id, /news, /send-ddf-sms og /settings. 
 | Forsikringsdekning | Saksdetaljer | [Notater](coverage-notes.md) | [Tekster](coverage-copy.md) | 7 |
 | Skademelding og DDF | Saksdetaljer | [Notater](damage-form-notes.md) | [Tekster](damage-form-copy.md) | 26 |
 | Bilder og vedlegg | Saksdetaljer | [Notater](images-notes.md) | [Tekster](images-copy.md) | 48 |
-| Deler og arbeid | Saksdetaljer | [Notater](parts-labor-notes.md) | [Tekster](parts-labor-copy.md) | 23 |
+| Deler og arbeid | Saksdetaljer | [Notater](parts-labor-notes.md) | [Tekster](parts-labor-copy.md) | 28 |
 | Kalibrering | Saksdetaljer og opprettelse | [Notater](calibration-notes.md) | [Tekster](calibration-copy.md) | 75 |
 | Faktura i saksdetaljer | Saksdetaljer | [Notater](invoice-notes.md) | [Tekster](invoice-copy.md) | 9 |
-| Logg og meldinger | Saksdetaljer | [Notater](communication-notes.md) | [Tekster](communication-copy.md) | 4 |
+| Comments og Activity log | Saksdetaljer | [Notater](communication-notes.md) | [Tekster](communication-copy.md) | 7 |
 | Opprette sak – ramme og navigasjon | /new-case | [Notater](create-case-notes.md) | [Tekster](create-case-copy.md) | 24 |
 | Opprette sak – kjøretøy og dekning | /new-case · steg 1 | [Notater](create-vehicle-notes.md) | [Tekster](create-vehicle-copy.md) | 70 |
 | Opprette sak – skademelding | /new-case · steg 2 | [Notater](create-claim-notes.md) | [Tekster](create-claim-copy.md) | 88 |
@@ -26,6 +26,7 @@ Seks aktive sider: /, /new-case, /cases/:id, /news, /send-ddf-sms og /settings. 
 | Nyheter | /news | [Notater](news-notes.md) | [Tekster](news-copy.md) | 13 |
 | Sende DDF-SMS | /send-ddf-sms | [Notater](send-ddf-sms-notes.md) | [Tekster](send-ddf-sms-copy.md) | 12 |
 | Innstillinger | /settings | [Notater](settings-notes.md) | [Tekster](settings-copy.md) | 26 |
+| Agreements (lokal demo) | /price-agreement | [Notater](agreements-notes.md) | [Tekster](agreements-copy.md) | 48 |
 | Navigasjon og støtte | Felles skall | [Notater](navigation-notes.md) | [Tekster](navigation-copy.md) | 21 |
 | Felles status og opplasting | Delte komponenter | [Notater](shared-notes.md) | [Tekster](shared-copy.md) | 4 |
 
@@ -36,6 +37,14 @@ Seks aktive sider: /, /new-case, /cases/:id, /news, /send-ddf-sms og /settings. 
 Ukjent rute går til /. Ingen egen login- eller rapportside er registrert i App. Ikke opprett tekstark som later som slike sider finnes. Eldre/inaktive komponenter som NewCaseModal, CaseInfoSidebar, ChatLogSection og CaseSummarySection er ikke dokumentert som aktive sider.
 
 ## Vedlikehold
+
+Se [endringsloggen til utviklerne](endringslogg.md) for løpende oversikt over endringer, kode-/demostatus og hva som er formidlet.
+
+2026-11-02: Hovedtitlene på alle sju aktive sider bruker Dashboard-stilen: `text-lg font-semibold text-gray-900` (18 px, semibold og samme tekstfarge). Dette gjelder også hovedtitlene i CaseDetailHeader og CaseCreationFeature. Titteltekster og eksisterende tekst-ID-er er beholdt; seksjonsoverskrifter og modaltitler har egne nivåer. Kontrollen er kodebasert, ikke visuell nettleserverifisering.
+
+Sidetoppene er også forenklet etter brukerens bestilling 2026-11-02: tittel uten dekorativt ikon, introduksjonstekst eller egen kortbakgrunn, kantlinje og skygge. Alle hovedtitler starter 24 px fra venstre og 32 px fra toppen av det delte innholdsområdet, tilsvarende Dashboard. News beholder smalere lesebredde for artiklene, mens tittelen følger felles innrykk. Saksdetaljer beholder festet fremdriftsvisning og flytter handlinger, dato og VRN til eget felt under tittelen. Avtalenes demomerking og versjonsopplysninger er bevart i innholdet. Fjernede introduksjonstekster er markert i tekstarkene med opprinnelige ID-er. Nettleserkontroll av faktisk plassering og rulling gjenstår.
+
+Kontroll av sidetoppendringen: bygg og ti avtaletester består. Kalibreringsregresjonen har 13 beståtte og to feilede tester knyttet til eksisterende tekstforventninger i vurderingsvisningen; testfilen og kalibreringskomponentene er ikke endret av sidetoppendringen. Ingen produksjons- eller visuell verifisering er utført.
 
 Begynn med [redigere tekst](editing-copy.md). Bevar eksisterende tekst-ID-er og forslag. Legg nye tekster til med nye ID-er, og marker fjernet/erstattet tekst. Oppdater relevante notes-filer og denne oversikten når sider endres. Delte komponenter dokumenteres én gang.
 

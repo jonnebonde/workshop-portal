@@ -68,13 +68,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               className="flex items-center px-3 py-2 text-sm text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
               onClick={() => setIsProfileOpen(!isProfileOpen)}
             >
-              <img 
-                src={user?.avatar || 'https://i.pravatar.cc/300'} 
-                alt="User avatar" 
-                className="w-8 h-8 rounded-full ring-2 ring-gray-200"
-              />
-              <span className="ml-2 text-sm font-medium text-white hidden sm:block">{user?.name}</span>
-              <ChevronDown className="ml-1 w-4 h-4 text-white hidden sm:block" />
+              <span className="max-w-[45vw] truncate text-sm font-medium text-white sm:max-w-xs">{user?.name}</span>
+              <ChevronDown className="ml-1 h-4 w-4 shrink-0 text-white" aria-hidden="true" />
             </button>
             
             {isProfileOpen && (
@@ -150,7 +145,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               }
             >
              
-              Dashboard
+              Cases
             </NavLink>
                    <NavLink 
               to="/new-case" 
@@ -184,6 +179,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               )}
             </NavLink>
 
+            {user && <NavLink
+              to="/price-agreement"
+              onClick={() => setIsSidebarOpen(false)}
+              className={({ isActive }) =>
+                `flex items-center px-3 py-2.5 text-sm rounded-lg transition-all duration-200 ${isActive
+                  ? 'bg-blue-700 text-white shadow-sm'
+                  : 'text-blue-100 hover:bg-blue-700 hover:text-white hover:shadow-sm'}`
+              }
+            >Agreements</NavLink>}
+
             <NavLink 
               to="/send-ddf-sms" 
               className={({ isActive }) => 
@@ -201,7 +206,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </aside>
       
       {/* Main content */}
-      <div className="flex flex-col flex-1 bg-brand-dark mt-16">
+      <div className="flex min-w-0 flex-col flex-1 bg-brand-dark mt-16">
 
         {/* Scrollable content area */}
         <div className="flex-1 overflow-y-auto bg-gray-50 min-w-0 rounded-tl-md lg:ml-48">

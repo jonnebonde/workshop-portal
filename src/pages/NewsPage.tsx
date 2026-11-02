@@ -113,15 +113,14 @@ const NewsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 px-6 py-6 bg-background max-w-4xl mx-auto">
+    <div className="space-y-8 px-6 py-8">
       {/* Header */}
-      <div className="space-y-2">
+      <div>
        
-        <h1 className="text-3xl font-bold text-brand-dark">News</h1>
-        <p className="text-gray-700 max-w-3xl">Latest updates and announcements</p>
+        <h1 className="text-lg font-semibold text-gray-900">News</h1>
       </div>
       {/* News List */}
-      <div className="space-y-6">
+      <div className="mx-auto max-w-4xl space-y-6">
         {mockNews.map((newsItem) => (
           <article
             key={newsItem.id}

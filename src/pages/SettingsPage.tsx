@@ -68,11 +68,10 @@ const SettingsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 px-6 py-8">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
-        <p className="text-gray-600">Manage your account settings and preferences</p>
+        <h1 className="text-lg font-semibold text-gray-900">Settings</h1>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

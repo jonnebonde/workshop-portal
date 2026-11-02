@@ -8,6 +8,11 @@ interface BaseItem {
   id: string;
   type: 'part' | 'labor';
   total: number;
+  demoAgreementCheck?: {
+    status: 'matched' | 'review_required';
+    agreementId?: string;
+    versionId?: string;
+  };
 }
 
 // Part-specific properties
@@ -111,7 +116,7 @@ export interface ChatMessage {
 
 export interface ActionLogEntry {
   id: string;
-  actionType: 'case_created' | 'status_changed' | 'file_uploaded' | 'invoice_reviewed' | 'parts_added' | 'calibration_updated' | 'insurance_updated' | 'image_uploaded' | 'stage_changed' | 'note_added' | 'sms_sent' | 'other';
+  actionType: 'case_created' | 'status_changed' | 'file_uploaded' | 'invoice_reviewed' | 'parts_added' | 'calibration_updated' | 'insurance_updated' | 'image_uploaded' | 'stage_changed' | 'note_added' | 'sms_sent' | 'comment_added' | 'other';
   actor: string;
   actorType: 'system' | 'workshop' | 'agent';
   description: string;
@@ -211,6 +216,7 @@ export interface WorkshopCase {
   actionLog: ActionLogEntry[];
   isChatLogEnabled?: boolean;
   lastLogViewedAt?: string;
+  lastCommentsViewedAt?: string;
   assessment?: Assessment;
   calibration?: Calibration;
   insuranceCoverage?: InsuranceCoverage;

@@ -481,6 +481,7 @@ const CaseDetail: React.FC = () => {
               {/* Full Width Sections Below */}
               <div id="parts-labor">
                 <PartsLaborSection
+                  key={caseData.id}
                   caseData={caseData}
                   onUpdate={handleUpdateCase}
                   isSectionComplete={isPartsLaborComplete}
@@ -499,7 +500,7 @@ const CaseDetail: React.FC = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+              <div className="space-y-4">
                 <div id="invoice">
                   <InvoiceFileManagement
                     caseData={caseData}
@@ -510,13 +511,11 @@ const CaseDetail: React.FC = () => {
                   />
                 </div>
 
-                <div id="communication-log">
-                  <CommunicationLogSection
-                    caseData={caseData}
-                    onUpdate={handleUpdateCase}
-                    isSectionComplete={false}
-                  />
-                </div>
+                <CommunicationLogSection
+                  key={caseData.id}
+                  caseData={caseData}
+                  onUpdate={handleUpdateCase}
+                />
               </div>
             </div>
 

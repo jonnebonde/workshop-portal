@@ -9,7 +9,7 @@ Fyll inn **Forslag**, behold ID og plassholdere. Tom celle betyr ingen endring. 
 | WP-SET-001 | Tilbakemelding; [SettingsPage.tsx:61](../src/pages/SettingsPage.tsx#L61) | Changes saved successfully! | |
 | WP-SET-002 | Tilbakemelding; [SettingsPage.tsx:64](../src/pages/SettingsPage.tsx#L64) | Error saving changes. Please try again. | |
 | WP-SET-003 | Synlig tekst; [SettingsPage.tsx:74](../src/pages/SettingsPage.tsx#L74) | Settings | |
-| WP-SET-004 | Synlig tekst; [SettingsPage.tsx:75](../src/pages/SettingsPage.tsx#L75) | Manage your account settings and preferences | |
+| WP-SET-004 | Fjernet fra sidetoppen 2026-11-02; [SettingsPage.tsx](../src/pages/SettingsPage.tsx) | Fjernet. Tidligere: Manage your account settings and preferences | |
 | WP-SET-005 | Synlig tekst; [SettingsPage.tsx:85](../src/pages/SettingsPage.tsx#L85) | Brukerdetaljer | |
 | WP-SET-006 | Synlig tekst; [SettingsPage.tsx:92](../src/pages/SettingsPage.tsx#L92) | Navn | |
 | WP-SET-007 | Synlig tekst; [SettingsPage.tsx:106](../src/pages/SettingsPage.tsx#L106) | Email | |

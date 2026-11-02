@@ -18,6 +18,8 @@ App har ingen /login-rute, selv om utlogging navigerer dit. AuthContext er en lo
 
 ## Åpne spørsmål og TODO
 
+2026-10-29: Agreements er lagt til for innlogget demobruker på `/price-agreement`. Menytekst dokumenteres i [avtaletekstarket](agreements-copy.md), WP-AGR-001. Siden gir bare lesemodus; dette etablerer ikke rollebasert backend-tilgang. Lenken lukker mobilmenyen ved navigasjon.
+
 - [ ] Avklar reell innlogging, navigasjon per rolle, støtteintegrasjon og bunnlenker som nå peker til #.
 - [ ] Gjennomgå og velg ønskede tekstforslag i tekstarket før implementering.
 - [ ] Kontroller berørte tilstander i nettleseren når UI endres.

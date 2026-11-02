@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft, Clock, Calendar, CheckCircle } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import { WorkshopCase } from '../data/mockData';
 import { formatDateTime } from '../utils/formatters';
 import ProgressTracker from './ProgressTracker';
@@ -47,52 +47,28 @@ const CaseDetailHeader: React.FC<CaseDetailHeaderProps> = ({ caseData, onBack })
   };
 
   return (
-    <div id="case-detail-sticky-header" className="sticky top-0 z-30 shadow-lg">
-      <div className="bg-white">
-        <div className="px-4 sm:px-6 py-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <div className="flex items-center gap-4 flex-1">
-              <button
-                onClick={handleBackClick}
-                className="inline-flex items-center px-3 py-2 bg-blue-600 hover:bg-blue/20 border border-white/20 rounded-lg text-white transition-all duration-200 backdrop-blur-sm"
-              >
-                <ChevronLeft className="h-5 w-5" />
-                <span className="ml-1 hidden sm:inline">Back</span>
-              </button>
-
-              <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-3">
-                  <h1 className="text-xl sm:text-2xl font-bold ">
-                    Case number: {caseData.caseNumber}
-                  </h1>
-
-                </div>
-                <div className="flex flex-wrap items-center gap-4 mt-2 text-sm">
-                  <span className="flex items-center gap-1.5">
-                    <Calendar className="h-4 w-4" />
-                    {formatDateTime(caseData.createdAt)}
-                  </span>
-                  <span className="flex items-center gap-1.5 font-bold">
-                    VRN: {caseData.vehicle.licensePlate}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center">
-              <button
-                onClick={handleSubmitClick}
-                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-200 transform"
-                title="Submit Case"
-              >
-          
-                <span className="font-medium">Submit Case</span>
-              </button>
-            </div>
-          </div>
-        </div>
+    <div id="case-detail-sticky-header" className="sticky top-0 z-30 bg-gray-50 pt-8">
+      <div className="px-6">
+        <h1 className="text-lg font-semibold text-gray-900">
+          VRN: {caseData.vehicle.licensePlate}
+        </h1>
       </div>
-
+      <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-4">
+        <div className="flex flex-wrap items-center gap-4">
+          <button onClick={handleBackClick}
+            className="inline-flex items-center rounded-lg bg-blue-600 px-3 py-2 text-white transition-colors hover:bg-blue-700">
+            <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+            <span className="ml-1">Back</span>
+          </button>
+          <span className="text-sm text-gray-700">{formatDateTime(caseData.createdAt)}</span>
+          <span className="text-sm font-semibold text-gray-900">Case number: {caseData.caseNumber}</span>
+        </div>
+        <button onClick={handleSubmitClick}
+          className="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition-colors hover:bg-blue-700"
+          title="Submit Case">
+          Submit Case
+        </button>
+      </div>
       <div className="bg-white border-t border-gray-200">
         <div className="px-4 sm:px-6 py-4">
           <ProgressTracker caseData={caseData} />

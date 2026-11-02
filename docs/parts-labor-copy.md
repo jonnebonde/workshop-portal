@@ -19,9 +19,9 @@ Fyll inn **Forslag**, behold ID og plassholdere. Tom celle betyr ingen endring. 
 | WP-PAR-011 | Synlig tekst; [PartsLaborSection.tsx:327](../src/components/sections/PartsLaborSection.tsx#L327) | Disc % | |
 | WP-PAR-012 | Synlig tekst; [PartsLaborSection.tsx:328](../src/components/sections/PartsLaborSection.tsx#L328) | Total | |
 | WP-PAR-013 | Synlig tekst; [PartsLaborSection.tsx:329](../src/components/sections/PartsLaborSection.tsx#L329) | Comment | |
-| WP-PAR-014 | Synlig tekst; [PartsLaborSection.tsx:342](../src/components/sections/PartsLaborSection.tsx#L342) | No items added | |
-| WP-PAR-015 | Synlig tekst; [PartsLaborSection.tsx:343](../src/components/sections/PartsLaborSection.tsx#L343) | Add parts and labor to continue | |
-| WP-PAR-016 | Synlig tekst; [PartsLaborSection.tsx:354](../src/components/sections/PartsLaborSection.tsx#L354) | Add Item | |
+| WP-PAR-014 | Tomtilstand erstattet av tom ordrelinje 2026-11-02 | Fjernet. Tidligere: No items added | |
+| WP-PAR-015 | Tomtilstand erstattet av tom ordrelinje 2026-11-02 | Fjernet. Tidligere: Add parts and labor to continue | |
+| WP-PAR-016 | Knapp erstattet av automatisk ny rad 2026-11-02 | Fjernet. Tidligere: Add Item | |
 | WP-PAR-017 | Synlig tekst; [PartsLaborSection.tsx:366](../src/components/sections/PartsLaborSection.tsx#L366) | Subtotal (Parts + Labor) | |
 | WP-PAR-018 | Synlig tekst; [PartsLaborSection.tsx:375](../src/components/sections/PartsLaborSection.tsx#L375) | VAT (25%) | |
 | WP-PAR-019 | Synlig tekst; [PartsLaborSection.tsx:377](../src/components/sections/PartsLaborSection.tsx#L377) | (Not Liable) | |
@@ -29,3 +29,8 @@ Fyll inn **Forslag**, behold ID og plassholdere. Tom celle betyr ingen endring. 
 | WP-PAR-021 | Synlig tekst; [PartsLaborSection.tsx:403](../src/components/sections/PartsLaborSection.tsx#L403) | Deductible | |
 | WP-PAR-022 | Visning / betinget tekst; [PartsLaborSection.tsx:406](../src/components/sections/PartsLaborSection.tsx#L406) | - [verdi1] | |
 | WP-PAR-023 | Synlig tekst; [PartsLaborSection.tsx:414](../src/components/sections/PartsLaborSection.tsx#L414) | Insurance Total | |
+| WP-PAR-024 | Ny lokal ordrelinje; [PartsLaborSection.tsx](../src/components/sections/PartsLaborSection.tsx) | New line | |
+| WP-PAR-025 | title på tømming av utkast; [PartsLaborSection.tsx](../src/components/sections/PartsLaborSection.tsx) | Clear new line | |
+| WP-PAR-026 | Forklaring av demoflyt; [PartsLaborSection.tsx](../src/components/sections/PartsLaborSection.tsx) | Demo agreement check. Complete the required fields to check the line and start the next one. Unmatched lines require manual review. | |
+| WP-PAR-027 | Demotreff; [PartsLaborSection.tsx](../src/components/sections/PartsLaborSection.tsx) | Demo: price matches agreement | |
+| WP-PAR-028 | Demolinje til vurdering; [PartsLaborSection.tsx](../src/components/sections/PartsLaborSection.tsx) | Demo: pending manual approval | |
