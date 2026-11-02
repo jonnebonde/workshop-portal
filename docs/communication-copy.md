@@ -6,7 +6,10 @@ Fyll inn **Forslag**, behold ID og plassholdere. Tom celle betyr ingen endring. 
 
 | ID | Hvor | Dagens tekst | Forslag |
 | --- | --- | --- | --- |
-| WP-LOG-001 | title; [CommunicationLogSection.tsx:81](../src/components/sections/CommunicationLogSection.tsx#L81) | Log | |
+| WP-LOG-001 | Hendelsesfelt og fremdriftslinje; endret fra Log 2026-11-02; [CommunicationLogSection.tsx](../src/components/sections/CommunicationLogSection.tsx) | Activity log | |
 | WP-LOG-002 | placeholder; [CommunicationLogSection.tsx:94](../src/components/sections/CommunicationLogSection.tsx#L94) | Type your message... | |
 | WP-LOG-003 | title; [CommunicationLogSection.tsx:109](../src/components/sections/CommunicationLogSection.tsx#L109) | Send message | |
 | WP-LOG-004 | Synlig tekst; [ActionLogView.tsx:74](../src/components/sections/ActionLogView.tsx#L74) | No activity logged yet | |
+| WP-LOG-005 | Kommentarfelt og fremdriftslinje; [CommunicationLogSection.tsx](../src/components/sections/CommunicationLogSection.tsx) | Comments | |
+| WP-LOG-006 | Tomt kommentarfelt; [CommunicationLogSection.tsx](../src/components/sections/CommunicationLogSection.tsx) | No comments yet | |
+| WP-LOG-007 | Tilgjengelig navn på skrivefelt; [CommunicationLogSection.tsx](../src/components/sections/CommunicationLogSection.tsx) | Comment | |

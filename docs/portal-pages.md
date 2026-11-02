@@ -16,7 +16,7 @@ Sju aktive sider: /, /new-case, /cases/:id, /news, /send-ddf-sms, /settings og /
 | Deler og arbeid | Saksdetaljer | [Notater](parts-labor-notes.md) | [Tekster](parts-labor-copy.md) | 23 |
 | Kalibrering | Saksdetaljer og opprettelse | [Notater](calibration-notes.md) | [Tekster](calibration-copy.md) | 75 |
 | Faktura i saksdetaljer | Saksdetaljer | [Notater](invoice-notes.md) | [Tekster](invoice-copy.md) | 9 |
-| Logg og meldinger | Saksdetaljer | [Notater](communication-notes.md) | [Tekster](communication-copy.md) | 4 |
+| Comments og Activity log | Saksdetaljer | [Notater](communication-notes.md) | [Tekster](communication-copy.md) | 7 |
 | Opprette sak – ramme og navigasjon | /new-case | [Notater](create-case-notes.md) | [Tekster](create-case-copy.md) | 24 |
 | Opprette sak – kjøretøy og dekning | /new-case · steg 1 | [Notater](create-vehicle-notes.md) | [Tekster](create-vehicle-copy.md) | 70 |
 | Opprette sak – skademelding | /new-case · steg 2 | [Notater](create-claim-notes.md) | [Tekster](create-claim-copy.md) | 88 |

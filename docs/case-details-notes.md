@@ -20,6 +20,8 @@ useCaseData leser og oppdaterer mockData. Fakturabehandling og dokumentmetadata 
 
 ## Åpne spørsmål og TODO
 
+2026-11-02: Etter brukerens beskjed og et skjermbilde fra testmiljøet er VRN og saksnummer byttet: VRN er hovedtittel, mens saksnummer står i informasjonsfeltet under. Brukeren bekreftet at repoets nye utforming skal beholdes, og at Comments skal ha meldinger/skrivefelt mens Activity log viser hendelser separat. Dette er implementert som lokal demo med egne felt og snarveier under fakturaen; se [kommunikasjonsnotater](communication-notes.md). Skjermbildet er visuell referanse, ikke verifisering av testmiljøets datakontrakt. Andre forskjeller skal fortsatt avklares med brukeren før endring.
+
 - [ ] Brukerønske 2026-10-28: La headeren på saksdetaljsiden forklare status og tilbakemeldinger på saksdata og seksjoner mer detaljert. Avklar hvilke tilstander, tilbakemeldinger og neste handlinger som skal vises, i sammenheng med [fjerning av progressikoner fra sakslisten](cases-notes.md).
 - [ ] Verifiser statusoverganger, avbrudd, manglende sak og sammenhengen mellom opprettelse og saksdetaljer.
 - [ ] Gjennomgå og velg ønskede tekstforslag i tekstarket før implementering.

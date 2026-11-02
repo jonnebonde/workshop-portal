@@ -13,6 +13,7 @@ Bruk avkryssingen til å holde kontroll på hva som er formidlet. Den betyr ikke
 | WP-END-005 | 2026-11-02 | Dashboard endret til Cases i sidemenyen | Endret i arbeidskopien, ikke committet ved registrering | [ ] |
 | WP-END-006 | 2026-11-02 | Navn uten profilbilde i toppnavigasjonen | Endret i arbeidskopien, ikke committet ved registrering | [ ] |
 | WP-END-007 | 2026-11-02 | Demoboks på Agreements følger Developer mode-stilen | Endret i arbeidskopien, ikke committet ved registrering | [ ] |
+| WP-END-008 | 2026-11-02 | VRN som hovedtittel, Comments og Activity log | Lokal demo endret i arbeidskopien | [ ] |
 
 Arbeidsgren ved registrering: `docs/workshop-agreements-task`, HEAD `9ba6987`. Commitopplysningene er kontrollert lokalt; ekstern lagring, merge og produksjon er ikke verifisert her.
 
@@ -95,6 +96,16 @@ Kilde: [AgreementsView](../src/features/agreements/AgreementsView.tsx) og [avtal
 - Sist kjørte bygg og ti avtaletester består. Målrettet lint/typekontroll bestod under avtale-/eksportarbeidet; dette er ikke en full typekontroll av repoet.
 - Siste kalibreringsregresjon: 13 beståtte, to feilede tester på tekstforventninger. Kalibreringskomponentene og testfilen er ikke endret av sidetittelarbeidet. Dette er et separat funn.
 - Visuell nettleserkontroll er ikke gjennomført. Ingen av oppføringene bekrefter produksjonsleveranse.
+
+## WP-END-008 – Tilpasning mot skjermbilde fra testmiljø
+
+**Til utviklerne:** VRN og saksnummer har byttet plass. VRN er nå hovedtittel, og saksnummer vises under sammen med dato. Gjeldende tittelstil er beholdt. Endringen er kontrollert i kode og med diffkontroll, ikke i nettleser.
+
+Brukeren bekreftet at repoets nye utforming skal beholdes og at Comments skal skilles fra Activity log. Det er nå to felt under fakturaen, med egne snarveier og ulestmarkeringer. Comments har skrivefelt; nye kommentarer får eksplisitt type og vises separat fra hendelser. Eksisterende oppføringer uten sikker kommentarmerking bevares i aktivitetsloggen. Fakturaen står over feltene i full bredde.
+
+Sending er fortsatt lokal demo, uten bekreftet mottak hos saksbehandler eller serverlagring. Fire målrettede kommunikasjonstester består; faktisk sending, mobilvisning og rulling må kontrolleres i nettleser. Øvrige forskjeller i skjermbildet skal avklares før endring. Skjermbildets saks- og persondata er ikke lagret i repoet.
+
+Kilde: [CaseDetailHeader](../src/components/CaseDetailHeader.tsx), [saksnotater](case-details-notes.md) og brukerens skjermbilde/beskjed 2026-11-02.
 
 ## Videre oppdatering
 

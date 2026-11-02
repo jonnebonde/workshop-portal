@@ -8,9 +8,10 @@ import { ActionLogEntry } from '../../data/mockData';
 
 interface ActionLogViewProps {
   actionLog: ActionLogEntry[];
+  emptyMessage?: string;
 }
 
-const ActionLogView: React.FC<ActionLogViewProps> = ({ actionLog }) => {
+const ActionLogView: React.FC<ActionLogViewProps> = ({ actionLog, emptyMessage = 'No activity logged yet' }) => {
   const getActorIcon = (actorType: ActionLogEntry['actorType']) => {
     switch (actorType) {
       case 'system':
@@ -71,7 +72,7 @@ const ActionLogView: React.FC<ActionLogViewProps> = ({ actionLog }) => {
       <div className="flex items-center justify-center h-96">
         <div className="text-center">
           <Settings className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-          <p className="text-gray-500">No activity logged yet</p>
+          <p className="text-gray-500">{emptyMessage}</p>
         </div>
       </div>
     );
@@ -96,7 +97,7 @@ const ActionLogView: React.FC<ActionLogViewProps> = ({ actionLog }) => {
 
             {/* Message Bubble */}
             <div className={`px-4 py-2.5 rounded-lg ${getMessageBubbleColor(entry.actorType)}`}>
-              <p className="text-sm">{entry.description}</p>
+              <p className="whitespace-pre-wrap break-words text-sm">{entry.description}</p>
             </div>
           </div>
         </div>

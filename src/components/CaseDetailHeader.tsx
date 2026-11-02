@@ -50,7 +50,7 @@ const CaseDetailHeader: React.FC<CaseDetailHeaderProps> = ({ caseData, onBack })
     <div id="case-detail-sticky-header" className="sticky top-0 z-30 bg-gray-50 pt-8">
       <div className="px-6">
         <h1 className="text-lg font-semibold text-gray-900">
-          Case number: {caseData.caseNumber}
+          VRN: {caseData.vehicle.licensePlate}
         </h1>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-4">
@@ -61,7 +61,7 @@ const CaseDetailHeader: React.FC<CaseDetailHeaderProps> = ({ caseData, onBack })
             <span className="ml-1">Back</span>
           </button>
           <span className="text-sm text-gray-700">{formatDateTime(caseData.createdAt)}</span>
-          <span className="text-sm font-semibold text-gray-900">VRN: {caseData.vehicle.licensePlate}</span>
+          <span className="text-sm font-semibold text-gray-900">Case number: {caseData.caseNumber}</span>
         </div>
         <button onClick={handleSubmitClick}
           className="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition-colors hover:bg-blue-700"
