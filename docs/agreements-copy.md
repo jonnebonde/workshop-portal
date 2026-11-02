@@ -9,9 +9,9 @@ Eksportvalg, versjonsbekreftelse og eksportfeil ligger nå i [AgreementExportMod
 | ID | Hvor | Dagens tekst | Forslag |
 | --- | --- | --- | --- |
 | WP-AGR-001 | Sidetittel og navigasjon | Agreements | |
-| WP-AGR-002 | Introduksjon | Your workshop’s prices, terms and published version history. | |
-| WP-AGR-003 | Rettighet | Read-only access | |
-| WP-AGR-004 | Demoopplysning | Demo preview · Fictional agreements and prices for review. | |
+| WP-AGR-002 | Fjernet fra sidetoppen 2026-11-02 | Fjernet. Tidligere: Your workshop’s prices, terms and published version history. | |
+| WP-AGR-003 | Fjernet fra sidetoppen 2026-11-02 | Fjernet. Tidligere: Read-only access | |
+| WP-AGR-004 | Demoopplysning, delt i overskrift og brødtekst 2026-11-02 | Demo preview / Fictional agreements and prices for review. | |
 | WP-AGR-005 | Kontekst | Workshop | |
 | WP-AGR-006 | Selskapsvelger | Insurance company | |
 | WP-AGR-007 | Avtaletype fra datamodell | Price agreement / Framework terms / Windscreen prices | |

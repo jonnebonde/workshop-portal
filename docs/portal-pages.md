@@ -38,6 +38,14 @@ Ukjent rute går til /. Ingen egen login- eller rapportside er registrert i App.
 
 ## Vedlikehold
 
+Se [endringsloggen til utviklerne](endringslogg.md) for løpende oversikt over endringer, kode-/demostatus og hva som er formidlet.
+
+2026-11-02: Hovedtitlene på alle sju aktive sider bruker Dashboard-stilen: `text-lg font-semibold text-gray-900` (18 px, semibold og samme tekstfarge). Dette gjelder også hovedtitlene i CaseDetailHeader og CaseCreationFeature. Titteltekster og eksisterende tekst-ID-er er beholdt; seksjonsoverskrifter og modaltitler har egne nivåer. Kontrollen er kodebasert, ikke visuell nettleserverifisering.
+
+Sidetoppene er også forenklet etter brukerens bestilling 2026-11-02: tittel uten dekorativt ikon, introduksjonstekst eller egen kortbakgrunn, kantlinje og skygge. Alle hovedtitler starter 24 px fra venstre og 32 px fra toppen av det delte innholdsområdet, tilsvarende Dashboard. News beholder smalere lesebredde for artiklene, mens tittelen følger felles innrykk. Saksdetaljer beholder festet fremdriftsvisning og flytter handlinger, dato og VRN til eget felt under tittelen. Avtalenes demomerking og versjonsopplysninger er bevart i innholdet. Fjernede introduksjonstekster er markert i tekstarkene med opprinnelige ID-er. Nettleserkontroll av faktisk plassering og rulling gjenstår.
+
+Kontroll av sidetoppendringen: bygg og ti avtaletester består. Kalibreringsregresjonen har 13 beståtte og to feilede tester knyttet til eksisterende tekstforventninger i vurderingsvisningen; testfilen og kalibreringskomponentene er ikke endret av sidetoppendringen. Ingen produksjons- eller visuell verifisering er utført.
+
 Begynn med [redigere tekst](editing-copy.md). Bevar eksisterende tekst-ID-er og forslag. Legg nye tekster til med nye ID-er, og marker fjernet/erstattet tekst. Oppdater relevante notes-filer og denne oversikten når sider endres. Delte komponenter dokumenteres én gang.
 
 Eksisterende [kalibreringsnotat](calibration-ux-ui.md) og [nyhetsnotat](news-page-ux-ui.md) er bevart. Kildekode og brukerflyt er ikke endret av dokumentasjonsarbeidet. Se [kontrollrapport](documentation-check.md).

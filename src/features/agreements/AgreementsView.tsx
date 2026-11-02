@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FileText, LockKeyhole, Search, History } from 'lucide-react';
+import { FileText, Search, History } from 'lucide-react';
 import { filterLines, type AgreementVersion, type WorkshopAgreement } from './model';
 import AgreementExportModal from './AgreementExportModal';
 
@@ -52,9 +52,12 @@ export default function AgreementsView({ workshop, agreements }: { workshop: str
   const currentInsurer = insurers.includes(insurer) ? insurer : insurers[0];
   const available = agreements.filter(a => a.insurer === currentInsurer);
   const selected = available.find(a => a.id === selectedId) ?? available[0];
-  return <div className="space-y-6 px-4 py-6 sm:px-6">
-    <header className="flex flex-wrap items-start justify-between gap-4"><div><h1 className="text-2xl font-semibold text-brand-dark">Agreements</h1><p className="mt-2 text-sm text-gray-500">Your workshop’s prices, terms and published version history.</p></div><div className="flex items-center gap-2 text-sm text-gray-500"><LockKeyhole size={16} aria-hidden="true" />Read-only access</div></header>
-    <p className="rounded-md border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-gray-800">Demo preview · Fictional agreements and prices for review.</p>
+  return <div className="space-y-6 px-6 py-8">
+    <header><h1 className="text-lg font-semibold text-gray-900">Agreements</h1></header>
+    <div className="rounded-md border border-dashed border-orange-300 bg-orange-50 p-3">
+      <p className="mb-2 text-sm font-semibold text-gray-900">Demo preview</p>
+      <p className="text-sm text-gray-700">Fictional agreements and prices for review.</p>
+    </div>
     <section className="flex flex-wrap items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-5"><div className="flex items-center gap-3"><FileText aria-hidden="true" className="text-brand-primary" /><div><p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Workshop</p><p className="mt-1 font-semibold text-brand-dark">{workshop}</p></div></div>{!!insurers.length && <label className="w-full text-sm font-medium text-gray-800 sm:w-72">Insurance company<select className={field} value={currentInsurer ?? ''} onChange={e => { setInsurer(e.target.value); setSelectedId(''); }}>{insurers.map(i => <option key={i}>{i}</option>)}</select></label>}</section>
     {selected ? <><nav aria-label="Agreement areas" className="flex gap-7 overflow-x-auto border-b border-gray-300">{available.map(a => <button key={a.id} aria-current={selected.id === a.id ? 'page' : undefined} onClick={() => setSelectedId(a.id)} className={`shrink-0 border-b-2 px-1 py-3 text-sm font-semibold ${selected.id === a.id ? 'border-brand-primary text-brand-primary' : 'border-transparent text-gray-500 hover:text-brand-dark'}`}>{a.kind}</button>)}</nav><AgreementDetails key={`${currentInsurer}:${selected.id}`} workshop={workshop} agreement={selected} /></> : <section className="rounded-lg border border-gray-300 bg-white p-12 text-center"><h2 className="text-lg font-semibold text-brand-dark">No agreements available</h2><p className="mt-2 text-sm text-gray-500">No published agreements have been assigned to this workshop. Contact your administrator if you expected to see an agreement.</p></section>}
   </div>;

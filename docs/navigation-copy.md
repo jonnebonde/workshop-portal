@@ -7,11 +7,11 @@ Fyll inn **Forslag**, behold ID og plassholdere. Tom celle betyr ingen endring. 
 | ID | Hvor | Dagens tekst | Forslag |
 | --- | --- | --- | --- |
 | WP-NAV-001 | Synlig tekst; [Layout.tsx:61](../src/components/Layout.tsx#L61) | Logo | |
-| WP-NAV-002 | alt; [Layout.tsx:73](../src/components/Layout.tsx#L73) | User avatar | |
+| WP-NAV-002 | Profilbilde fjernet fra toppnavigasjonen 2026-11-02; [Layout.tsx](../src/components/Layout.tsx) | Fjernet. Tidligere alt-tekst: User avatar | |
 | WP-NAV-003 | Synlig tekst; [Layout.tsx:87](../src/components/Layout.tsx#L87) | Signed in as | |
 | WP-NAV-004 | Synlig tekst; [Layout.tsx:96](../src/components/Layout.tsx#L96) | Settings | |
 | WP-NAV-005 | Synlig tekst; [Layout.tsx:103](../src/components/Layout.tsx#L103) | Sign Out | |
-| WP-NAV-006 | Synlig tekst; [Layout.tsx:153](../src/components/Layout.tsx#L153) | Dashboard | |
+| WP-NAV-006 | Synlig tekst; [Layout.tsx:153](../src/components/Layout.tsx#L153); endret fra Dashboard 2026-11-02 | Cases | |
 | WP-NAV-007 | Synlig tekst; [Layout.tsx:166](../src/components/Layout.tsx#L166) | Create new case | |
 | WP-NAV-008 | Synlig tekst; [Layout.tsx:179](../src/components/Layout.tsx#L179) | News | |
 | WP-NAV-009 | Synlig tekst; [Layout.tsx:197](../src/components/Layout.tsx#L197) | Send DDF SMS | |

@@ -49,4 +49,6 @@ Bevar FACT, DECISION, PROPOSAL, OPEN_QUESTION, HISTORICAL og SUPERSEDED med kild
 
 ## Levering
 
+Oppdater [endringsloggen til utviklerne](docs/endringslogg.md) ved brukerrettede endringer. Ta med hva som er endret, status, kilde og gjenstående kontroll. Ikke marker noe som formidlet, godkjent eller produksjonssatt uten bekreftelse. Rene tekniske justeringer uten brukerbetydning trenger normalt ikke eget punkt.
+
 Rapporter hva som ble endret, kontroller og begrensninger, branch/commit og minnestatus. Kontroller alle nye filer og relevante lenker før commit. Push normalt til avtalt arbeidsgren; bekreft remote og les endringer tilbake før ekstern lagring påstås.

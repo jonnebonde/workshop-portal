@@ -68,13 +68,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               className="flex items-center px-3 py-2 text-sm text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
               onClick={() => setIsProfileOpen(!isProfileOpen)}
             >
-              <img 
-                src={user?.avatar || 'https://i.pravatar.cc/300'} 
-                alt="User avatar" 
-                className="w-8 h-8 rounded-full ring-2 ring-gray-200"
-              />
-              <span className="ml-2 text-sm font-medium text-white hidden sm:block">{user?.name}</span>
-              <ChevronDown className="ml-1 w-4 h-4 text-white hidden sm:block" />
+              <span className="max-w-[45vw] truncate text-sm font-medium text-white sm:max-w-xs">{user?.name}</span>
+              <ChevronDown className="ml-1 h-4 w-4 shrink-0 text-white" aria-hidden="true" />
             </button>
             
             {isProfileOpen && (
@@ -150,7 +145,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               }
             >
              
-              Dashboard
+              Cases
             </NavLink>
                    <NavLink 
               to="/new-case" 

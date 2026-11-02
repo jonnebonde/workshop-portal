@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import { MessageSquare } from 'lucide-react';
 import { ToastContainer } from '../components/Toast';
 import { useToast } from '../hooks/useToast';
 
@@ -28,15 +27,9 @@ const SendDdfSmsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 py-6 px-6">
-      <header className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
-          <MessageSquare className="h-5 w-5 text-blue-600" />
-        </div>
-        <div>
-          <h1 className="text-xl font-semibold text-gray-900">Send DDF SMS</h1>
-          <p className="text-sm text-gray-500">Request a Digital Damage Form without creating a case.</p>
-        </div>
+    <div className="space-y-6 px-6 py-8">
+      <header>
+        <h1 className="text-lg font-semibold text-gray-900">Send DDF SMS</h1>
       </header>
 
       <form onSubmit={handleSubmit} className="grid gap-6 lg:grid-cols-3">

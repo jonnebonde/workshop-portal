@@ -12,6 +12,8 @@ Presentasjonen følger AP/PP-mønsteret med avtaleområder, kontekst, gyldighet,
 
 ## Kode og avgrensning
 
+2026-11-02: Demoopplysningen følger utseendet til Developer mode-panelet i saksdetaljenes kalibrering: lys oransje bakgrunn, stiplet oransje kant, avrundede hjørner og liten semibold overskrift. Den er fortsatt synlig demomerking uten av/på-bryter eller nye utviklerhandlinger.
+
 - [AgreementsPage](../src/pages/AgreementsPage.tsx): lokal innloggings-/lastetilstand og datakobling.
 - [AgreementsView](../src/features/agreements/AgreementsView.tsx): kontekst, avtaleområder, historikk, filtre og tabell.
 - [model](../src/features/agreements/model.ts): eksplisitt tilordning og filtrering. Ingen automatisk prioritet mellom kjede- og verkstedavtale eller skjult fallback til rammevilkår.

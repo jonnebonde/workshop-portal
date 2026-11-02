@@ -7,7 +7,7 @@ Fyll inn **Forslag**, behold ID og plassholdere. Tom celle betyr ingen endring. 
 | ID | Hvor | Dagens tekst | Forslag |
 | --- | --- | --- | --- |
 | WP-NEWS-001 | Synlig tekst; [NewsPage.tsx:120](../src/pages/NewsPage.tsx#L120) | News | |
-| WP-NEWS-002 | Synlig tekst; [NewsPage.tsx:121](../src/pages/NewsPage.tsx#L121) | Latest updates and announcements | |
+| WP-NEWS-002 | Fjernet fra sidetoppen 2026-11-02; [NewsPage.tsx](../src/pages/NewsPage.tsx) | Fjernet. Tidligere: Latest updates and announcements | |
 | WP-NEWS-003 | Synlig tekst; [NewsPage.tsx:137](../src/pages/NewsPage.tsx#L137) | New message | |
 | WP-NEWS-004 | Synlig tekst; [NewsPage.tsx:149](../src/pages/NewsPage.tsx#L149) | Published: | |
 | WP-NEWS-005 | Synlig tekst; [NewsPage.tsx:159](../src/pages/NewsPage.tsx#L159) | View | |
