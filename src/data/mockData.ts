@@ -8,6 +8,11 @@ interface BaseItem {
   id: string;
   type: 'part' | 'labor';
   total: number;
+  demoAgreementCheck?: {
+    status: 'matched' | 'review_required';
+    agreementId?: string;
+    versionId?: string;
+  };
 }
 
 // Part-specific properties

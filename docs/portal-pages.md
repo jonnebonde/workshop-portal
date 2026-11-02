@@ -13,7 +13,7 @@ Sju aktive sider: /, /new-case, /cases/:id, /news, /send-ddf-sms, /settings og /
 | Forsikringsdekning | Saksdetaljer | [Notater](coverage-notes.md) | [Tekster](coverage-copy.md) | 7 |
 | Skademelding og DDF | Saksdetaljer | [Notater](damage-form-notes.md) | [Tekster](damage-form-copy.md) | 26 |
 | Bilder og vedlegg | Saksdetaljer | [Notater](images-notes.md) | [Tekster](images-copy.md) | 48 |
-| Deler og arbeid | Saksdetaljer | [Notater](parts-labor-notes.md) | [Tekster](parts-labor-copy.md) | 23 |
+| Deler og arbeid | Saksdetaljer | [Notater](parts-labor-notes.md) | [Tekster](parts-labor-copy.md) | 28 |
 | Kalibrering | Saksdetaljer og opprettelse | [Notater](calibration-notes.md) | [Tekster](calibration-copy.md) | 75 |
 | Faktura i saksdetaljer | Saksdetaljer | [Notater](invoice-notes.md) | [Tekster](invoice-copy.md) | 9 |
 | Comments og Activity log | Saksdetaljer | [Notater](communication-notes.md) | [Tekster](communication-copy.md) | 7 |

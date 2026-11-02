@@ -14,6 +14,7 @@ Bruk avkryssingen til å holde kontroll på hva som er formidlet. Den betyr ikke
 | WP-END-006 | 2026-11-02 | Navn uten profilbilde i toppnavigasjonen | Endret i arbeidskopien, ikke committet ved registrering | [ ] |
 | WP-END-007 | 2026-11-02 | Demoboks på Agreements følger Developer mode-stilen | Endret i arbeidskopien, ikke committet ved registrering | [ ] |
 | WP-END-008 | 2026-11-02 | VRN som hovedtittel, Comments og Activity log | Lokal demo endret i arbeidskopien | [ ] |
+| WP-END-009 | 2026-11-02 | Automatisk ny ordrelinje etter utfylling og demosjekk | Lokal demo endret i arbeidskopien | [ ] |
 
 Arbeidsgren ved registrering: `docs/workshop-agreements-task`, HEAD `9ba6987`. Commitopplysningene er kontrollert lokalt; ekstern lagring, merge og produksjon er ikke verifisert her.
 
@@ -106,6 +107,16 @@ Brukeren bekreftet at repoets nye utforming skal beholdes og at Comments skal sk
 Sending er fortsatt lokal demo, uten bekreftet mottak hos saksbehandler eller serverlagring. Fire målrettede kommunikasjonstester består; faktisk sending, mobilvisning og rulling må kontrolleres i nettleser. Øvrige forskjeller i skjermbildet skal avklares før endring. Skjermbildets saks- og persondata er ikke lagret i repoet.
 
 Kilde: [CaseDetailHeader](../src/components/CaseDetailHeader.tsx), [saksnotater](case-details-notes.md) og brukerens skjermbilde/beskjed 2026-11-02.
+
+## WP-END-009 – Én tom ordrelinje og simulert avtalesjekk
+
+**Til utviklerne:** Fjern Add Item-knappen på saksdetaljer. Vis én tom linje nederst. Når nødvendige felt er fylt ut og avtalesjekken har et resultat, lagres linjen og neste tomme linje vises. Brukeren bekreftet at også resultat til manuell vurdering skal tillate neste rad. Tom rad skal ikke lagres eller inngå i summer/fullføring.
+
+Lokal demo kontrollerer linjen ved feltvalidering, viser tydelig demotreff eller ventende manuell vurdering og endrer ikke priser automatisk. Arbeidslinjer går til manuell vurdering inntil enhets-/timepriskontrakten er definert. Sjekken nullstilles ved redigering; gamle linjer og agentkommentarer bevares. Eksisterende ufullstendige linjer får ikke enda en tom rad lagt til.
+
+Tre målrettede ordrelinjetester, fire kommunikasjonstester og ti avtaletester består. Visuell nettleserkontroll og reell avtalesjekk/backend-integrasjon gjenstår. Dette er ikke en bekreftet prisberegningsregel eller agentgodkjenning.
+
+Kilde: [PartsLaborSection](../src/components/sections/PartsLaborSection.tsx), [ordrelinjehjelper](../src/utils/orderLines.ts), [sidenotater](parts-labor-notes.md) og brukerens avklaringer 2026-11-02. Opprettelsesflytens separate Parts & Labor-steg er ikke endret av dette oppdraget.
 
 ## Videre oppdatering
 

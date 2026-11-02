@@ -481,6 +481,7 @@ const CaseDetail: React.FC = () => {
               {/* Full Width Sections Below */}
               <div id="parts-labor">
                 <PartsLaborSection
+                  key={caseData.id}
                   caseData={caseData}
                   onUpdate={handleUpdateCase}
                   isSectionComplete={isPartsLaborComplete}

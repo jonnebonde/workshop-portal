@@ -10,6 +10,7 @@
     "test:calibration": "node --test scripts/test-calibration.mjs",
     "test:agreements": "node --test scripts/test-agreements.mjs",
     "test:communication": "node --test scripts/test-case-communication.mjs",
+    "test:order-lines": "node --test scripts/test-order-lines.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

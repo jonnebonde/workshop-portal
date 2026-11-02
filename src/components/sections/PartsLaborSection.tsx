@@ -1,7 +1,10 @@
-import React from 'react';
-import { PenTool as Tool, Plus, Trash2, CheckCircle, FileEdit } from 'lucide-react';
-import { WorkshopCase, PartsLaborItem, partCategories, SectionApprovalStatus } from '../../data/mockData';
+import React, { useRef, useState } from 'react';
+import { Trash2, CheckCircle, FileEdit } from 'lucide-react';
+import { WorkshopCase, PartsLaborItem, SectionApprovalStatus } from '../../data/mockData';
 import SectionWrapper from './SectionWrapper';
+import { useAuth } from '../../context/AuthContext';
+import { getDemoAgreements } from '../../features/agreements/demoRepository';
+import { createOrderLineDraft, isOrderLineComplete, checkDemoOrderLine } from '../../utils/orderLines';
 
 interface PartsLaborSectionProps {
   caseData: WorkshopCase;
@@ -61,25 +64,30 @@ const PartsLaborSection: React.FC<PartsLaborSectionProps> = ({
   const hasLabor = caseData.partsAndLabor.items.some(item => item.type === 'labor');
   const isComplete = hasParts && hasLabor;
 
-  const addItem = () => {
-    const newItem: PartsLaborItem = {
-      id: `item-${Date.now()}`,
-      type: 'part', // Default to part, will be updated when category is selected
-      category: '',
-      articleNr: '',
-      quantity: 1,
-      price: 0,
-      discount: 0,
-      status: 'Pending',
-      total: 0
-    } as any;
+  const { user } = useAuth();
+  const [draft, setDraft] = useState(createOrderLineDraft);
+  const committedDraft = useRef<string | null>(null);
+  const { agreements } = getDemoAgreements(user?.id);
+  const draftIndex = caseData.partsAndLabor.items.length;
+  const showDraft = caseData.partsAndLabor.items.every(isOrderLineComplete);
 
-    const updatedItems = [...caseData.partsAndLabor.items, newItem];
-    updatePartsAndLabor(updatedItems);
+  const checkItem = (index: number) => {
+    const isDraft = index === draftIndex;
+    const item = isDraft ? draft : caseData.partsAndLabor.items[index];
+    if (isDraft && committedDraft.current === item.id) return;
+    const checked = checkDemoOrderLine(item, agreements, caseData.insuranceCompany);
+    if (!checked) return;
+    if (isDraft) {
+      committedDraft.current = item.id;
+      updatePartsAndLabor([...caseData.partsAndLabor.items, checked]);
+      setDraft(createOrderLineDraft());
+    } else if (JSON.stringify(item.demoAgreementCheck) !== JSON.stringify(checked.demoAgreementCheck)) {
+      updatePartsAndLabor(caseData.partsAndLabor.items.map((line, i) => i === index ? checked : line));
+    }
   };
 
   const updateItem = (index: number, updates: Partial<PartsLaborItem>) => {
-    const newItems = [...caseData.partsAndLabor.items];
+    const newItems = [...caseData.partsAndLabor.items, draft];
     const currentItem = newItems[index];
     
     // If category is being updated, infer the type and set defaults
@@ -97,9 +105,9 @@ const PartsLaborSection: React.FC<PartsLaborSectionProps> = ({
             hours: undefined,
             ratePerHour: undefined,
             // Set part-specific defaults
-            quantity: currentItem.quantity || 1,
+            quantity: currentItem.quantity ?? 1,
             price: selectedItem.defaultPrice || 0,
-            discount: currentItem.discount || 0,
+            discount: currentItem.discount ?? 0,
             status: currentItem.status || 'Pending',
             articleNr: currentItem.articleNr || ''
           } as any;
@@ -121,7 +129,9 @@ const PartsLaborSection: React.FC<PartsLaborSectionProps> = ({
           } as any;
         }
       } else {
-        newItems[index] = { ...currentItem, ...updates };
+        newItems[index] = currentItem.type === 'labor'
+          ? { ...currentItem, ...updates, description: updates.category }
+          : { ...currentItem, ...updates };
       }
     } else {
       newItems[index] = { ...currentItem, ...updates };
@@ -138,7 +148,9 @@ const PartsLaborSection: React.FC<PartsLaborSectionProps> = ({
       laborItem.total = (laborItem.hours || 0) * (laborItem.ratePerHour || 0);
     }
 
-    updatePartsAndLabor(newItems);
+    newItems[index].demoAgreementCheck = undefined;
+    if (index === draftIndex) setDraft(newItems[index]);
+    else updatePartsAndLabor(newItems.slice(0, -1));
   };
 
   const removeItem = (index: number) => {
@@ -149,11 +161,11 @@ const PartsLaborSection: React.FC<PartsLaborSectionProps> = ({
   const updatePartsAndLabor = (items: PartsLaborItem[]) => {
     const totalParts = items
       .filter(item => item.type === 'part')
-      .reduce((sum, item) => sum + item.total, 0);
+      .reduce((sum, item) => sum + (Number.isFinite(item.total) ? item.total : 0), 0);
     
     const totalLabor = items
       .filter(item => item.type === 'labor')
-      .reduce((sum, item) => sum + item.total, 0);
+      .reduce((sum, item) => sum + (Number.isFinite(item.total) ? item.total : 0), 0);
 
     onUpdate({
       partsAndLabor: {
@@ -168,18 +180,15 @@ const PartsLaborSection: React.FC<PartsLaborSectionProps> = ({
 
   const formatCurrency = (amount: number) => currencyFormatter.format(amount);
 
-  const getItemType = (category: string): 'part' | 'labor' => {
-    const item = partsAndLaborItems.find(item => item.name === category);
-    return item?.type || 'part';
-  };
-
   const renderItemRow = (item: PartsLaborItem, index: number) => {
     const isPartType = item.type === 'part';
+    const isDraft = index === draftIndex;
     
     return (
-      <tr key={item.id} className="border-b border-gray-100">
+      <tr key={item.id} onBlur={() => checkItem(index)} className={isDraft ? 'border-b border-gray-100 bg-blue-50' : 'border-b border-gray-100'}>
         {/* Category/Description */}
         <td className="px-3 py-2">
+          {isDraft && <span className="mb-1 block text-xs font-semibold text-blue-700">New line</span>}
           <select
             value={isPartType ? (item as any).category || '' : (item as any).description || ''}
             onChange={(e) => updateItem(index, { category: e.target.value })}
@@ -213,9 +222,9 @@ const PartsLaborSection: React.FC<PartsLaborSectionProps> = ({
         <td className="px-3 py-2">
           <input
             type="number"
-            value={isPartType ? (item as any).quantity || 1 : (item as any).hours || 1}
+            value={Number.isFinite(isPartType ? (item as any).quantity : (item as any).hours) ? (isPartType ? (item as any).quantity : (item as any).hours) : ''}
             onChange={(e) => {
-              const value = parseFloat(e.target.value) || 1;
+              const value = parseFloat(e.target.value);
               updateItem(index, isPartType ? { quantity: value } : { hours: value });
             }}
             className="block w-20 px-2 py-1.5 text-sm border border-gray-300 rounded shadow-sm focus:border-transparent focus:ring-2 focus:ring-blue-500  [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
@@ -228,9 +237,9 @@ const PartsLaborSection: React.FC<PartsLaborSectionProps> = ({
         <td className="px-3 py-2">
           <input
             type="number"
-            value={isPartType ? (item as any).price || 0 : (item as any).ratePerHour || 150}
+            value={Number.isFinite(isPartType ? (item as any).price : (item as any).ratePerHour) ? (isPartType ? (item as any).price : (item as any).ratePerHour) : ''}
             onChange={(e) => {
-              const value = parseFloat(e.target.value) || 0;
+              const value = parseFloat(e.target.value);
               updateItem(index, isPartType ? { price: value } : { ratePerHour: value });
             }}
             className="block w-24 px-2 py-1.5 text-sm border border-gray-300 rounded shadow-sm focus:border-transparent focus:ring-2 focus:ring-blue-500  [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
@@ -245,9 +254,9 @@ const PartsLaborSection: React.FC<PartsLaborSectionProps> = ({
             <div className="relative">
               <input
                 type="number"
-                value={(item as any).discount || 0}
+                value={Number.isFinite((item as any).discount) ? (item as any).discount : ''}
                 onChange={(e) => {
-                  const value = Math.min(100, Math.max(0, parseFloat(e.target.value) || 0));
+                  const value = Math.min(100, Math.max(0, parseFloat(e.target.value)));
                   updateItem(index, { discount: value });
                 }}
                 className="block w-16 px-2 py-1.5 text-sm border border-gray-300 rounded shadow-sm focus:border-transparent focus:ring-2 focus:ring-blue-500 pr-6  [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
@@ -267,12 +276,15 @@ const PartsLaborSection: React.FC<PartsLaborSectionProps> = ({
         {/* Total */}
         <td className="px-3 py-2">
           <span className="text-xs font-semibold text-gray-900">
-            {formatCurrency(item.total)}
+            {formatCurrency(Number.isFinite(item.total) ? item.total : 0)}
           </span>
         </td>
 
         {/* Agent Comment */}
         <td className="px-3 py-2">
+          {item.demoAgreementCheck && <span role="status" className="mb-1 block text-xs font-medium text-blue-700">
+            {item.demoAgreementCheck.status === 'matched' ? 'Demo: price matches agreement' : 'Demo: pending manual approval'}
+          </span>}
           {(item as any).agentComment ? (
             <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
               (item as any).agentComment === 'Approved'
@@ -294,9 +306,11 @@ const PartsLaborSection: React.FC<PartsLaborSectionProps> = ({
         {/* Delete */}
         <td className="px-3 py-2">
           <button
-            onClick={() => removeItem(index)}
+            type="button"
+            onMouseDown={event => { if (isDraft) event.preventDefault(); }}
+            onClick={() => isDraft ? setDraft(createOrderLineDraft()) : removeItem(index)}
             className="text-red-600 hover:text-red-900 transition-colors"
-            title="Remove item"
+            title={isDraft ? 'Clear new line' : 'Remove item'}
           >
             <Trash2 className="h-5 w-5" />
           </button>
@@ -332,28 +346,12 @@ const PartsLaborSection: React.FC<PartsLaborSectionProps> = ({
               </thead>
               <tbody className="bg-white">
                 {caseData.partsAndLabor.items.map((item, index) => renderItemRow(item, index))}
+                {showDraft && renderItemRow(draft, draftIndex)}
               </tbody>
             </table>
           </div>
 
-          {caseData.partsAndLabor.items.length === 0 && (
-            <div className="text-center py-8 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-              <Tool className="h-8 w-8 text-gray-300 mx-auto mb-2" />
-              <p className="text-sm text-gray-500 mb-1">No items added</p>
-              <p className="text-xs text-gray-400">Add parts and labor to continue</p>
-            </div>
-          )}
-
-          {/* Add Item Button */}
-          <div className="flex justify-center mt-4">
-            <button
-              onClick={addItem}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-xs font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-all"
-            >
-              <Plus className="h-3 w-3 mr-1" />
-              Add Item
-            </button>
-          </div>
+          <p className="mt-3 text-xs text-gray-500">Demo agreement check. Complete the required fields to check the line and start the next one. Unmatched lines require manual review.</p>
         </div>
 
         {/* Totals Summary - Insurance Company Calculation */}
